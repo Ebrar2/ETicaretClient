@@ -1,7 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CustomToastr, ToastrMessageTypes, ToastrPositions } from './services/ui/custom-toastr';
 import { Position } from './services/admin/alertify';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
@@ -16,5 +15,6 @@ export class App implements OnInit {
 
   }
   ngOnInit(): void {
+     
   }
 }

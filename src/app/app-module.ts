@@ -8,6 +8,7 @@ import { AdminModule } from './admin/admin-module';
 import { UiModule } from './ui/ui-module';
 import { ToastrModule } from 'ngx-toastr';
 import { Base } from './base/base';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,14 @@ import { Base } from './base/base';
     UiModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HttpClientModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    {provide:"baseUrl",useValue:"https://localhost:7160/api",multi:true}
   ],
   bootstrap: [App]
 })
