@@ -9,8 +9,7 @@ export class Alertify {
      alertify.set('notifier','position',alertifyOptions.position);
      alertify.set('notifier','delay', alertifyOptions.delay);
      alertify[alertifyOptions.messageType](message);
-     if(alertifyOptions.dismissOther)
-       alertify.dismissOther();
+  
    }
    dismiss()
    {
