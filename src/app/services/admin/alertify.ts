@@ -8,8 +8,9 @@ export class Alertify {
    {
      alertify.set('notifier','position',alertifyOptions.position);
      alertify.set('notifier','delay', alertifyOptions.delay);
-     alertify[alertifyOptions.messageType](message);
-  
+     const msj=alertify[alertifyOptions.messageType](message);
+     if (alertifyOptions.dismissOther)
+      msj.dismissOthers();
    }
    dismiss()
    {

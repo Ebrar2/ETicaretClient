@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Base, SpinnerTypeNames } from '../../../base/base';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClientService } from '../../../services/common/http-client';
+import { CreateProduct } from '../../../contracts/create_product';
+import { List } from './list/list';
 
 @Component({
   selector: 'app-products',
@@ -29,5 +31,11 @@ export class Products extends Base implements OnInit {
      this.httpClientService.get({
       fullEndPoint:"https://jsonplaceholder.typicode.com/posts"
      }).subscribe(data=>console.log(data))
+    }
+    @ViewChild(List) listComponent:List
+    createdProduct(createProduct:CreateProduct)
+    {
+      this.listComponent.getProducts();
+
     }
 }

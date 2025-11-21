@@ -8,6 +8,8 @@ import { List } from './list/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,7 @@ import {MatButtonModule} from '@angular/material/button';
     List
   ],
   imports: [
-    MatSidenavModule,MatFormFieldModule,MatInputModule,MatButtonModule,
+    MatSidenavModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatTableModule,MatPaginatorModule,
     CommonModule,RouterModule.forChild(
       [{path:"",component:Products}]
     )

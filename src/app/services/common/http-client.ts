@@ -25,7 +25,7 @@ export class HttpClientService {
     if(requestParameters.fullEndPoint)
       url=requestParameters.fullEndPoint;
     else
-      url=`${this.getUrl(requestParameters)}${id?`/${id}`:""}`;
+      url=`${this.getUrl(requestParameters)}${id ? `/${id}` : ""}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
 
     return this.httpClient.get<T>(url, {headers:requestParameters.headers});
   }
