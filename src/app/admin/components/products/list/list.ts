@@ -14,7 +14,7 @@ import { ListProduct } from '../../../../contracts/list_product';
   styleUrl: './list.scss',
 })
 export class List extends Base implements OnInit{
-  displayedColumns:string[]=["name","stock","price","updatedDate","createdDate"];
+  displayedColumns:string[]=["name","stock","price","updatedDate","createdDate","edit","delete"];
   dataSource:MatTableDataSource<ListProduct>=null;
    @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private productService:ProductService,spinner:NgxSpinnerService,private aletrtify:Alertify)
