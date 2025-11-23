@@ -16,7 +16,7 @@ export class CustomToastr {
 export class ToastrOptions
 {
   position:ToastrPositions=ToastrPositions.TopLeft;
-  messageType:ToastrMessageTypes.Info;
+  messageType:ToastrMessageTypes=ToastrMessageTypes.Info;
 }
 export enum ToastrMessageTypes
 {

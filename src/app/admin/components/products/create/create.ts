@@ -6,6 +6,7 @@ import { Base, SpinnerTypeNames } from '../../../../base/base';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Alertify, MessageType, Position } from '../../../../services/admin/alertify';
 import { EventEmitter } from '@angular/core';
+import { FileUplodOption } from '../../../../services/common/file-uplod/file-uplod';
 
 @Component({
   selector: 'app-create',
@@ -20,6 +21,14 @@ export class Create extends Base {
     super(spinner)
   }
  @Output() createdProduct: EventEmitter<CreateProduct> = new EventEmitter();
+ @Output() fileUploadOptions:Partial<FileUplodOption>={
+    explanation:"Resim seçiniz",
+    controller:"product",
+    action:"upload",
+    accept:".png,.jpg,.jpeg",
+    isAdmin:true
+ };
+
  create(name:HTMLInputElement,price:HTMLInputElement,stock:HTMLInputElement)
   {
      this.showSpinner(SpinnerTypeNames.BallScaleMultiple)
