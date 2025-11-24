@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialog, DeleteState } from '../../dialogs/delete-dialog/delete-dialog';
 import { Alertify, MessageType, Position } from '../../services/admin/alertify';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Dialog } from '../../services/common/dialog';
 
 declare var $:any;
 @Directive({
@@ -14,7 +15,7 @@ declare var $:any;
 })
 export class Delete {
 
-  constructor(public dialog:MatDialog,
+  constructor(public dialogService:Dialog,
     private spinner:NgxSpinnerService,
     private  element:ElementRef,
     private renderer:Renderer2,
@@ -36,7 +37,10 @@ export class Delete {
    @HostListener("click")
    onClick()
    {
-    this.openDialog(()=>{
+    this.dialogService.openDialog({
+      compenent:DeleteDialog,
+      data:DeleteState.Yes,
+      afterClosed:()=>{
 
     this.spinner.show(SpinnerTypeNames.BallScaleMultiple)
     this.httpClientService.delete({
@@ -66,21 +70,13 @@ export class Delete {
         
       );
        
+    }
     })
+
    }
 
 
- openDialog(afterClosed: any): void {
-    const dialogRef = this.dialog.open(DeleteDialog, {
-     width: '250px',
-      data: DeleteState.Yes,
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result == DeleteState.Yes)
-        afterClosed();
-    });
-  }
 
 
 }

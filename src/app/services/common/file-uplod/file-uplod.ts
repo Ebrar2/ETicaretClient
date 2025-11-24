@@ -4,6 +4,9 @@ import { HttpClientService } from '../http-client';
 import { Alertify, MessageType, Position } from '../../admin/alertify';
 import { CustomToastr, ToastrMessageTypes, ToastrPositions } from '../../ui/custom-toastr';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { FileUploadDialog, FileUploadState } from '../../../dialogs/file-upload-dialog/file-upload-dialog';
+import { Dialog } from '../dialog';
 
 @Component({
   selector: 'app-file-uplod',
@@ -14,16 +17,23 @@ import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 export class FileUplod {
   constructor(private httpClientService:HttpClientService,
     private alertify:Alertify,
-    private toastr:CustomToastr)
+    private toastr:CustomToastr,
+   private dialogService:Dialog)
   {
 
   }
  public files: NgxFileDropEntry[] ;
  @Input() options:Partial<FileUplodOption>;
-
+ 
+  
 
   public selectedFiles(files: NgxFileDropEntry[]) {
-    this.files = files;
+      this.files = files;
+     this.dialogService.openDialog({
+      compenent:FileUploadDialog,
+      data:FileUploadState.Yes,
+      afterClosed:()=>{
+           
     const fileData:FormData=new FormData();
     for (const file of files) {
 
@@ -31,8 +41,6 @@ export class FileUplod {
         fileData.append(_file.name, _file, file.relativePath);
       });
     }
-    console.log(fileData);
-    debugger
     this.httpClientService.post({
       controller:this.options.controller,
       action:this.options.action,
@@ -78,8 +86,8 @@ export class FileUplod {
             );
        }
     });
-  }
-
+     }})
+   }
   
 }
 export class FileUplodOption

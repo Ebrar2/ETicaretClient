@@ -11,21 +11,22 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { Delete } from '../../../directives/admin/delete';
-import {MatDialogModule} from '@angular/material/dialog';
-import { DeleteDialog } from '../../../dialogs/delete-dialog/delete-dialog';
+
 import { FileUplodModule } from '../../../services/common/file-uplod/file-uplod-module';
+import { DialogModule } from '../../../dialogs/dialog-module';
+import { MatDialog } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     Products,
     Create,
     List,
-    Delete,
-    DeleteDialog
+    Delete
   ],
   imports: [
-    MatSidenavModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatTableModule,MatPaginatorModule,MatDialogModule,
+    MatSidenavModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatTableModule,MatPaginatorModule,
     FileUplodModule,
+    DialogModule,
     CommonModule,RouterModule.forChild(
       [{path:"",component:Products}]
     )
