@@ -7,6 +7,8 @@ import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { FileUploadDialog, FileUploadState } from '../../../dialogs/file-upload-dialog/file-upload-dialog';
 import { Dialog } from '../dialog';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Base, SpinnerTypeNames } from '../../../base/base';
 
 @Component({
   selector: 'app-file-uplod',
@@ -14,13 +16,14 @@ import { Dialog } from '../dialog';
   templateUrl: './file-uplod.html',
   styleUrl: './file-uplod.scss',
 })
-export class FileUplod {
+export class FileUplod extends Base{
   constructor(private httpClientService:HttpClientService,
     private alertify:Alertify,
     private toastr:CustomToastr,
-   private dialogService:Dialog)
+   private dialogService:Dialog,
+   spinner:NgxSpinnerService)
   {
-
+   super(spinner)
   }
  public files: NgxFileDropEntry[] ;
  @Input() options:Partial<FileUplodOption>;
@@ -33,7 +36,7 @@ export class FileUplod {
       compenent:FileUploadDialog,
       data:FileUploadState.Yes,
       afterClosed:()=>{
-           
+    this.showSpinner(SpinnerTypeNames.BallScaleMultiple);
     const fileData:FormData=new FormData();
     for (const file of files) {
 
@@ -49,6 +52,7 @@ export class FileUplod {
      
     },fileData).subscribe(()=>{
     const message:string="Dosyalar başarıyla yüklenmiştir";
+    this.hideSpinner(SpinnerTypeNames.BallScaleMultiple);
        if(this.options.isAdmin)
        {
            this.alertify.message(message,{
@@ -68,6 +72,7 @@ export class FileUplod {
        }
     },(error:HttpErrorResponse)=>{
        const message:string="Dosyalar yükleme başarısız";
+       this.hideSpinner(SpinnerTypeNames.BallScaleMultiple);
        if(this.options.isAdmin)
        {
            this.alertify.message(message,{
