@@ -35,7 +35,7 @@ export class HttpClientService {
     if(requestParameters.fullEndPoint)
       url=requestParameters.fullEndPoint;
     else 
-      url=this.getUrl(requestParameters);
+      url=`${this.getUrl(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
     return this.httpClient.post<T>(url,body,{headers:requestParameters.headers})
 
   }
@@ -45,7 +45,7 @@ export class HttpClientService {
     if(requestParameters.fullEndPoint)
       url=requestParameters.fullEndPoint;
     else
-      url=this.getUrl(requestParameters);
+      url=`${this.getUrl(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
     return this.httpClient.put<T>(url,body,{headers:requestParameters.headers});
 
   }
@@ -55,7 +55,7 @@ export class HttpClientService {
      if(requestParameters.fullEndPoint)
       url=requestParameters.fullEndPoint;
      else
-      url=`${this.getUrl(requestParameters)}${id?`/${id}`:""}`;
+      url=`${this.getUrl(requestParameters)}${id?`/${id}`:""}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
     return this.httpClient.delete<T>(url,{headers:requestParameters.headers});
   }
 }

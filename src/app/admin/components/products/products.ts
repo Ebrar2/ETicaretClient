@@ -27,10 +27,6 @@ export class Products extends Base implements OnInit {
      // baseUrl:"https://jsonplaceholder.typicode.com",
       //controller:"posts"
      //}).subscribe(data=>console.log(data));
-
-     this.httpClientService.get({
-      fullEndPoint:"https://jsonplaceholder.typicode.com/posts"
-     }).subscribe(data=>console.log(data))
     }
     @ViewChild(List) listComponent:List
     createdProduct(createProduct:CreateProduct)

@@ -21,13 +21,6 @@ export class Create extends Base {
     super(spinner)
   }
  @Output() createdProduct: EventEmitter<CreateProduct> = new EventEmitter();
- @Output() fileUploadOptions:Partial<FileUplodOption>={
-    explanation:"Resim seçiniz",
-    controller:"product",
-    action:"upload",
-    accept:".png,.jpg,.jpeg",
-    isAdmin:true
- };
 
  create(name:HTMLInputElement,price:HTMLInputElement,stock:HTMLInputElement)
   {

@@ -23,9 +23,13 @@
       <th mat-header-cell *matHeaderCellDef> Created Date </th>
       <td mat-cell *matCellDef="let element"> {{element.createdDate|date:'dd/MM/yy'}} </td>
     </ng-container>
+     <ng-container matColumnDef="photo">
+      <th mat-header-cell *matHeaderCellDef> Photo </th>
+      <td mat-cell *matCellDef="let element"> <img  (click)="showProductImage(element.id)" style="cursor: pointer;" width="25" height="25" src="photo.png"> </td>
+    </ng-container>
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element"> <img width="25" height="25" src="edit.png"> </td>
+      <td mat-cell *matCellDef="let element"> <img style="cursor: pointer;" width="25" height="25" src="edit.png"> </td>
     </ng-container>
         <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef></th>
