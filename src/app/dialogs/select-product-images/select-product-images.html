@@ -2,7 +2,21 @@
 <mat-dialog-content>
 
  <app-file-uplod [options]="options"></app-file-uplod>
+
+
+ <mat-card class="product-image-card" appearance="outlined" *ngFor="let image of images">
+  <mat-card-header>
+  </mat-card-header>
+  <img mat-card-image style="width: 200px;height: 200px;" [src]="image.path" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+  </mat-card-content>
+  <mat-card-actions>
+    <button  matButton (click)="imageDelete(image.id,$event)" style="background-color: rgb(63, 0, 122); color: rgb(183, 90, 233);">DELETE</button>
+  </mat-card-actions>
+</mat-card>
 </mat-dialog-content>
+
+
 <mat-dialog-actions>
   <button matButton mat-dialog-close>Close</button>
 </mat-dialog-actions>

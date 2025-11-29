@@ -55,7 +55,7 @@ export class List extends Base implements OnInit{
       compenent:SelectProductImages,
       data:id,
       options:{
-        width:"1440px"
+        width:'1400px'
       }
      
     })

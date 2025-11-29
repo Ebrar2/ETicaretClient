@@ -16,9 +16,10 @@ constructor(private dialog:MatDialog)
           width:dialogOptions.options?.width,
           height:dialogOptions.options?.heigt,
           position:dialogOptions.options?.position,
+          maxWidth: 'none',
           data:dialogOptions.data,
         });
-    
+
         dialogRef.afterClosed().subscribe(result => {
           if (result == dialogOptions.data)
             dialogOptions.afterClosed();
