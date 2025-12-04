@@ -14,6 +14,5 @@ export class Products extends Base implements OnInit{
       super(spinner)
    }
    ngOnInit(): void {
-     this.showSpinner(SpinnerTypeNames.SquareJellyBox);
    }
 }

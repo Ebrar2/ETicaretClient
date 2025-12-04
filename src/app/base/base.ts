@@ -7,7 +7,7 @@ export class Base {
     {
       this.spinner.show(spinnerTypeName);
 
-    setTimeout(() => {
+   setTimeout(() => {
       this.spinner.hide(spinnerTypeName);
     }, 1000);
 

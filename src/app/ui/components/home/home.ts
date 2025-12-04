@@ -14,6 +14,6 @@ export class Home extends Base implements OnInit  {
      super(spinner)
    }
   ngOnInit(): void {
-    this.showSpinner(SpinnerTypeNames.SquareJellyBox)
+  
   }
 }
