@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { group } from 'console';
+import { UserService } from '../../../services/common/models/user-service';
+import { UserRegister } from '../../../entities/userRegister';
+import { CustomToastr, ToastrMessageTypes, ToastrPositions } from '../../../services/ui/custom-toastr';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +13,7 @@ import { group } from 'console';
 })
 export class Register implements OnInit {
   form:FormGroup;
-   constructor(private formBuilder:FormBuilder)
+   constructor(private formBuilder:FormBuilder,private userService:UserService,private toastrService:CustomToastr)
    {
 
    }
@@ -35,13 +38,26 @@ export class Register implements OnInit {
  
    }
    submitted: boolean = false;
-  async onSubmit(user: any) {
+  async onSubmit(user: UserRegister) {
     this.submitted = true;
 
     if (this.form.invalid)
      {
-          console.log(user)
           return
      }
+    const result = await this.userService.create(user);
+    if(result.succeeded){
+         this.toastrService.message(result.message,"Başarılı",{
+          messageType:ToastrMessageTypes.Success,
+          position:ToastrPositions.TopRight
+         })
+    }
+    else
+    {
+       this.toastrService.message(result.message,"HATA",{
+        messageType:ToastrMessageTypes.Error,
+        position:ToastrPositions.TopRight
+       })
+    }
   }
 }
