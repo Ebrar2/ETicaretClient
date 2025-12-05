@@ -15,7 +15,8 @@ const routes: Routes = [
   {path:"",component:Home},
   {path:"basket",loadChildren:()=>import("./ui/components/baskets/baskets-module").then(m=>m.BasketsModule)},
   {path:"products",loadChildren:()=>import("./ui/components/products/products-module").then(m=>m.ProductsModule)},
-  {path:"register",loadChildren:()=>import("./ui/components/register/register-module").then(m=>m.RegisterModule)}
+  {path:"register",loadChildren:()=>import("./ui/components/register/register-module").then(m=>m.RegisterModule)},
+  {path:"login",loadChildren:()=>import("./ui/components/login/login-module").then(m=>m.LoginModule)}
 
 ];
 

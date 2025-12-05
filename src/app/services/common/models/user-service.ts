@@ -14,11 +14,18 @@ export class UserService {
   }
 
   async create(user: UserRegister):Promise<CreateUserResponse> {
-     let result=this.httpClient.post< CreateUserResponse| UserRegister>({
+     const result=this.httpClient.post< CreateUserResponse| UserRegister>({
       controller: "users"
     }, user);
     return await firstValueFrom(result) as CreateUserResponse;
    
+  }
+  async login(usernameOrEmail:string,password:string)
+  {
+    return await firstValueFrom(this.httpClient.post({
+      controller:"users",
+      action:"login"
+    },{usernameOrEmail,password}))
   }
 
 }
