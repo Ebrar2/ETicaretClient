@@ -9,7 +9,7 @@ import { UiModule } from './ui/ui-module';
 import { ToastrModule } from 'ngx-toastr';
 import { Base } from './base/base';
 import { HttpClientModule } from '@angular/common/http';
-
+import {JwtModule}from '@auth0/angular-jwt'
 @NgModule({
   declarations: [
     App
@@ -23,7 +23,12 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    HttpClientModule
+    HttpClientModule,JwtModule.forRoot({
+      config:{
+        tokenGetter:()=>localStorage.getItem("accessToken"),
+        allowedDomains:["localhost:7160"]
+      }
+    })
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
