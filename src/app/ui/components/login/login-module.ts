@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    Login
   ],
   imports: [
     CommonModule,RouterModule.forChild([{

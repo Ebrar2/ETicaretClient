@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
-  constructor(private toastrService:CustomToastr,public authService:Auth,private router:Router,private changet:ChangeDetectorRef)
+  constructor(private toastrService:CustomToastr,protected authService:Auth,private router:Router,private changet:ChangeDetectorRef)
   {
     authService.identityCheck();
   }

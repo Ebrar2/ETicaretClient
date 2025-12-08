@@ -10,9 +10,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { Base } from './base/base';
 import { HttpClientModule } from '@angular/common/http';
 import {JwtModule}from '@auth0/angular-jwt'
+import { GoogleLoginProvider, GoogleSigninButtonModule, SOCIAL_AUTH_CONFIG, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { Login } from './ui/components/login/login';
 @NgModule({
   declarations: [
-    App
+    App,Login
     
   ],
   imports: [
@@ -23,6 +25,7 @@ import {JwtModule}from '@auth0/angular-jwt'
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
+    SocialLoginModule,GoogleSigninButtonModule,
     HttpClientModule,JwtModule.forRoot({
       config:{
         tokenGetter:()=>localStorage.getItem("accessToken"),
@@ -34,7 +37,20 @@ import {JwtModule}from '@auth0/angular-jwt'
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideClientHydration(withEventReplay()),
-    {provide:"baseUrl",useValue:"https://localhost:7160/api",multi:true}
+    {provide:"baseUrl",useValue:"https://localhost:7160/api",multi:true},
+    {provide:SOCIAL_AUTH_CONFIG,
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider("319438112970-qvb0of57h0uuuqh33nh3v2fd0da1cjsc.apps.googleusercontent.com",{
+              prompt:'select_account'
+            })
+          }
+        ],
+        onError: err => console.log(err)
+      }}
   ],
   bootstrap: [App]
 })
