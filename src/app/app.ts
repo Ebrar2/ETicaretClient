@@ -3,6 +3,8 @@ import { CustomToastr, ToastrMessageTypes, ToastrPositions } from './services/ui
 import { Position } from './services/admin/alertify';
 import { Auth } from './services/common/auth';
 import { Router } from '@angular/router';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { LoginTypeName } from './contracts/login_type_name';
 @Component({
   selector: 'app-root',
   templateUrl: './app.html',
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
-  constructor(private toastrService:CustomToastr,protected authService:Auth,private router:Router,private changet:ChangeDetectorRef)
+  constructor(private socialAUthService:SocialAuthService,private toastrService:CustomToastr,protected authService:Auth,private router:Router,private changet:ChangeDetectorRef)
   {
     authService.identityCheck();
   }
@@ -22,6 +24,10 @@ export class App implements OnInit {
   {
 
     localStorage.removeItem("accessToken");
+    if(LoginTypeName.Google==localStorage.getItem("loginTypeName"))
+     {
+          this.socialAUthService.signOut();
+     }
     this.authService.identityCheck();
     this.router.navigate([""])
     this.toastrService.message("Çıkış Yapılmıştır","Çıkış",{
