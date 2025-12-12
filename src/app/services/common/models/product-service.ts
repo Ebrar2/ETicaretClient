@@ -43,12 +43,13 @@ export class ProductService {
      })).then((d:{totalCount:number,products:ListProduct[]})=>{
       successCallBack()
       data=d;
+      return data;
     }
     ).catch((error:HttpErrorResponse)=>{
         errorCallBack(error.message)
      });
      
-      return data;
+    return data;
   }
  async readProductImages(id:string,successCallBack?:any,errorCallBack?:any):Promise<ListProductImage[]>
   {

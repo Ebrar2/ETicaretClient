@@ -23,6 +23,7 @@ export class UserAuthService {
     {
        localStorage.setItem("accessToken",token.accessToken);
       localStorage.setItem("loginTypeName",LoginTypeName.Standart);
+       localStorage.setItem("refreshToken",token.refreshToken);
        this.toastrService.message(token.message,"Başarılı",{
         messageType:ToastrMessageTypes.Success,
         position:ToastrPositions.TopRight
@@ -39,6 +40,19 @@ export class UserAuthService {
 
     callback()
   }
+  async loginWithRefreshToken(refreshToken:string)
+  {
+    const result=this.httpClient.post<LoginUserResponse|string>({
+      controller:"auth",
+      action:"loginWithRefreshToken"
+    },{refreshToken});
+     const token=await firstValueFrom(result) as LoginUserResponse;
+    if(token.succeeded)
+    {
+      localStorage.setItem("accessToken",token.accessToken);
+      localStorage.setItem("refreshToken",token.refreshToken);
+    }
+  }
  async loginWithGoogle(user:SocialUser,callback)
  {
     const result=this.httpClient.post<SocialUser|LoginUserResponse>({
@@ -48,6 +62,7 @@ export class UserAuthService {
    const token= await firstValueFrom(result) as LoginUserResponse;
    if(token.succeeded){
     localStorage.setItem("accessToken",token.accessToken);
+    localStorage.setItem("refreshToken",token.refreshToken);
     localStorage.setItem("loginTypeName",LoginTypeName.Google);
     this.toastrService.message(token.message,"Başarılı", {
       messageType:ToastrMessageTypes.Success,

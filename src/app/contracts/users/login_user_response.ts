@@ -1,6 +1,7 @@
 export class LoginUserResponse
 {
-    accessToken:string;
-    message:string;
-    succeeded:boolean;
+    accessToken?:string;
+    refreshToken?:string;
+    message?:string;
+    succeeded?:boolean;
 }

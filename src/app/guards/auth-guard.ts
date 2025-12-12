@@ -17,7 +17,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const spinner :NgxSpinnerService= inject(NgxSpinnerService);
   const authService:Auth=inject(Auth)
    spinner.show(SpinnerTypeNames.BallScaleMultiple)
-authService.identityCheck()
+//authService.identityCheck()
    if(!authService._isAuthenticated())       
    { spinner.hide(SpinnerTypeNames.SquareJellyBox)
     router.navigate(["/login"],{
