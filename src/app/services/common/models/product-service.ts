@@ -43,7 +43,7 @@ export class ProductService {
      })).then((d:{totalCount:number,products:ListProduct[]})=>{
       successCallBack()
       data=d;
-      return data;
+      
     }
     ).catch((error:HttpErrorResponse)=>{
         errorCallBack(error.message)
