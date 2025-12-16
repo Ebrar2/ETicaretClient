@@ -34,13 +34,13 @@ export class ProductService {
         errorCallBack(message);
      });
   }
-  async read(page:number=0,size:number=5,successCallBack?:()=>void,errorCallBack?:(errorMessage)=>void):Promise<{totalCount:number,products:ListProduct[]}>
+  async read(page:number=0,size:number=5,successCallBack?:()=>void,errorCallBack?:(errorMessage)=>void):Promise<{totalCount:number,products:ListProduct[],baseUrl:string}>
   {
-    let data:{totalCount:number,products:ListProduct[]}=null;
+    let data:{totalCount:number,products:ListProduct[],baseUrl:string}=null;
     await firstValueFrom(this.httpClient.get({
       controller:"product",
       queryString:`page=${page}&size=${size}`
-     })).then((d:{totalCount:number,products:ListProduct[]})=>{
+     })).then((d:{totalCount:number,products:ListProduct[],baseUrl:string})=>{
       successCallBack()
       data=d;
       
@@ -73,6 +73,17 @@ export class ProductService {
           controller:"product",
           queryString:"imageId="+imageId
         },productId)).then(()=>{
+          successCallBack()
+        })
+  }
+  async changeShowcaseProductImage(imageId:string,productId:string,successCallBack?:any)
+  {
+      await firstValueFrom(
+         this.httpClient.get({
+          action:"changeShowcaseForProductImage",
+          controller:"product",
+          queryString:"imageId="+imageId+"&"+"productId="+productId
+        })).then(()=>{
           successCallBack()
         })
   }

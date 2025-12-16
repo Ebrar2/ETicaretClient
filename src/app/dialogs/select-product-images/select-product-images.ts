@@ -61,10 +61,13 @@ export class SelectProductImages extends BaseDialog<SelectProductImages> impleme
             })
       }
     })
-   
-
-    
-          
+      
   }
+   showCase(imageId:string)
+     {
+      this.spinner.show(SpinnerTypeNames.BallScaleMultiple);
+       this.productService.changeShowcaseProductImage(imageId,this.data,()=>this.spinner.hide(SpinnerTypeNames.BallScaleMultiple))
+     }
+
 
 }

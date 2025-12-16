@@ -13,13 +13,11 @@ import { HubUrls } from '../../../constants/hub-url';
 })
 export class Dashboard extends Base implements OnInit
 {
-  constructor(spinner:NgxSpinnerService,private signalRService:SignalRService)
+  constructor(spinner:NgxSpinnerService)
   {
     super(spinner)
-    signalRService.start(HubUrls.ProductHub);
   }
    ngOnInit(): void {
-    this.signalRService.on(ReceiveFunctions.ProdcutAddedMessage,(message)=>{alert(message)})
      this.showSpinner(SpinnerTypeNames.BallScaleMultiple);
    }
 }

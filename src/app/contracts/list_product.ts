@@ -1,3 +1,5 @@
+import { ListProductImage } from "./list_product_image";
+
 export class ListProduct
  {
      id:string;
@@ -6,4 +8,6 @@ export class ListProduct
      price:number;
      createdDate:Date;
      updatedDate:Date
+     productImageFiles:ListProductImage[];
+
  }

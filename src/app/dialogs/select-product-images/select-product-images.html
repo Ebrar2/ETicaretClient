@@ -6,6 +6,7 @@
 
  <mat-card class="product-image-card" appearance="outlined" *ngFor="let image of images">
   <mat-card-header>
+    <input type="radio" name="img" (click)="showCase(image.id)"  [checked]="image.showcase"/>
   </mat-card-header>
   <img mat-card-image style="width: 200px;height: 200px;" [src]="image.path" alt="Photo of a Shiba Inu">
   <mat-card-content>
