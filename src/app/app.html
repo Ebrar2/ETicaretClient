@@ -17,9 +17,7 @@
                         <li class="nav-item">
                             <a routerLink="products" class="nav-link active" aria-current="page">Ürünler</a>
                         </li>
-                        <li class="nav-item">
-                            <a routerLink="basket" class="nav-link active" aria-current="page">Sepet</a>
-                        </li>
+                     
                         @if(!authService._isAuthenticated())
                         {
                           <li class="nav-item">
@@ -44,7 +42,13 @@
 
                      
                     </ul>
-                    
+                    <div class="d-flex">
+                        <button class="btn" data-bs-toggle="modal" data-bs-target="#basketModal"
+                           type="submit">
+                           <img width="35px" src="shopping-cart.png" o>
+                           Sepet
+                           </button>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -64,3 +68,9 @@
 <ngx-spinner name="spinner1" type="square-jelly-box"></ngx-spinner>
 <ngx-spinner name="spinner2" type="ball-spin-clockwise-fade"></ngx-spinner>
 <ngx-spinner name="spinner3" type="ball-scale-multiple"></ngx-spinner>
+
+
+<app-baskets ></app-baskets>
+
+
+

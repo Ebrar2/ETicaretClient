@@ -5,7 +5,7 @@ import { Base, SpinnerTypeNames } from '../../../../base/base';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Alertify, MessageType, Position } from '../../../../services/admin/alertify';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import { ListProduct } from '../../../../contracts/list_product';
+import { ListProduct } from '../../../../contracts/products/list_product';
 import { Dialog } from '../../../../services/common/dialog';
 import { SelectProductImages } from '../../../../dialogs/select-product-images/select-product-images';
 

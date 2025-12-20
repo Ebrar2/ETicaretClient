@@ -1,8 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../../services/common/models/product-service';
-import { ListProduct } from '../../../../contracts/list_product';
+import { ListProduct } from '../../../../contracts/products/list_product';
 import { ActivatedRoute } from '@angular/router';
-import { ListProductImage } from '../../../../contracts/list_product_image';
+import { ListProductImage } from '../../../../contracts/products/list_product_image';
+import { Base, SpinnerTypeNames } from '../../../../base/base';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { BasketService } from '../../../../services/common/models/basket-service';
+import { CustomToastr, ToastrMessageTypes, ToastrPositions } from '../../../../services/ui/custom-toastr';
 
 
 @Component({
@@ -11,10 +15,14 @@ import { ListProductImage } from '../../../../contracts/list_product_image';
   templateUrl: './list.html',
   styleUrl: './list.scss',
 })
-export class List implements OnInit {
-  constructor(private productService:ProductService,private changeD:ChangeDetectorRef,private activatedRoute:ActivatedRoute)
+export class List extends Base implements OnInit {
+  constructor(spinner:NgxSpinnerService,private productService:ProductService,private changeD:ChangeDetectorRef,
+    private activatedRoute:ActivatedRoute,
+    private basketService:BasketService,
+    private customToastrService:CustomToastr
+  )
   {
-
+    super(spinner)
   }
   products:{
          id:string;
@@ -29,11 +37,13 @@ export class List implements OnInit {
   totalPageCount:number;
   productPageSize=10;
   pageItems:number[]=[]
-  ngOnInit() {
+ async ngOnInit() {
      this.activatedRoute.params.subscribe(async params=>{
       this.currentPageNo=parseInt(params["pageNo"]??1)
-      const data=await this.productService.read(this.currentPageNo-1,this.productPageSize,()=>{console.log("başarılı")},()=>{console.log("başarısız")});
-       var resultProducts=data.products;
+      const data=await this.productService.read(this.currentPageNo-1,this.productPageSize,()=>{},()=>{});
+     if(data!=null)
+     {
+          var resultProducts=data.products;
        this.products=[];
        resultProducts.forEach(value=>{
          this.products.push({
@@ -50,10 +60,12 @@ export class List implements OnInit {
       let last=this.totalPageCount<3?this.totalPageCount:3;
      
       this.editPageItemValues();
-       
-       
-      this.changeD.detectChanges();
+       this.changeD.detectChanges();
 
+     }
+       
+       
+     
      })
     
   }
@@ -78,5 +90,20 @@ export class List implements OnInit {
     }
     }
 
+  }
+ async addBasketItem(productId)
+  {
+    this.showSpinner(SpinnerTypeNames.SquareJellyBox);
+   await  this.basketService.addBasketItem({
+      quantity:1,
+      productId:productId
+    }).then(()=>{
+      
+      this.hideSpinner(SpinnerTypeNames.SquareJellyBox)
+      this.customToastrService.message("Ürün sepetinize eklendi","Sepete eklendi",{
+        messageType:ToastrMessageTypes.Info,
+        position:ToastrPositions.TopRight
+      })
+    });
   }
 }

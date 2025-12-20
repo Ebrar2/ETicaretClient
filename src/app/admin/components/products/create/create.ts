@@ -1,6 +1,6 @@
 import { Component, Output } from '@angular/core';
 import { ProductService } from '../../../../services/common/models/product-service';
-import { CreateProduct } from '../../../../contracts/create_product';
+import { CreateProduct } from '../../../../contracts/products/create_product';
 import { parse } from 'path';
 import { Base, SpinnerTypeNames } from '../../../../base/base';
 import { NgxSpinnerService } from 'ngx-spinner';

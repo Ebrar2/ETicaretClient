@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FileUplodOption } from '../../services/common/file-uplod/file-uplod';
 import { identity } from 'rxjs';
 import { ProductService } from '../../services/common/models/product-service';
-import { ListProductImage } from '../../contracts/list_product_image';
+import { ListProductImage } from '../../contracts/products/list_product_image';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerTypeNames } from '../../base/base';
 import { Dialog } from '../../services/common/dialog';

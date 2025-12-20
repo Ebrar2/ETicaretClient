@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,RouterModule.forChild([
       {path:"",component:Baskets}
     ])
-  ]
+  ],
+  exports:[Baskets]
 })
 export class BasketsModule { }

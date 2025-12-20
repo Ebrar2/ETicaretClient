@@ -24,6 +24,7 @@ export class App implements OnInit {
   {
 
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     if(LoginTypeName.Google==localStorage.getItem("loginTypeName"))
      {
           this.socialAUthService.signOut();
