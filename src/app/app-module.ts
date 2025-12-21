@@ -13,9 +13,11 @@ import {JwtModule}from '@auth0/angular-jwt'
 import { GoogleLoginProvider, GoogleSigninButtonModule, SOCIAL_AUTH_CONFIG, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { Login } from './ui/components/login/login';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor-service';
+import { DynamicLoadComponenetDirective } from './directives/common/dynamic-load-componenet-directive';
+import { CdkNoDataRow } from "@angular/cdk/table";
 @NgModule({
   declarations: [
-    App,Login
+    App,Login, DynamicLoadComponenetDirective
     
   ],
   imports: [
@@ -26,14 +28,15 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    SocialLoginModule,GoogleSigninButtonModule,
-    HttpClientModule,JwtModule.forRoot({
-      config:{
-        tokenGetter:()=>localStorage.getItem("accessToken"),
-        allowedDomains:["localhost:7160"]
-      }
-    })
-  ],
+    SocialLoginModule, GoogleSigninButtonModule,
+    HttpClientModule, JwtModule.forRoot({
+        config: {
+            tokenGetter: () => localStorage.getItem("accessToken"),
+            allowedDomains: ["localhost:7160"]
+        }
+    }),
+    CdkNoDataRow
+],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
