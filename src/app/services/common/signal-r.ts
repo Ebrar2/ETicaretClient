@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@microsoft/signalr';
 import { Console, error } from 'console';
 
@@ -6,13 +6,18 @@ import { Console, error } from 'console';
   providedIn: 'root',
 })
 export class SignalRService {
+  constructor(@Inject("baseSignalRUrl") private baseSignalRUrl:string)
+  {
+
+  }
     private _hubConnection:HubConnection;
     get hubConnection()
     {
       return this._hubConnection;
     }
-    start(hubUrl:string)
+   start(hub:string)
     {
+      let hubUrl=this.baseSignalRUrl+hub;
       if(this._hubConnection==null || this._hubConnection?.state==HubConnectionState.Disconnected)
       {
          const builder:HubConnectionBuilder=new HubConnectionBuilder();

@@ -7,13 +7,6 @@ import { Alertify, MessageType, Position } from '../../services/admin/alertify';
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
-export class Layout implements OnInit{
-  constructor(private alertifyService:Alertify){
+export class Layout{
 
-  }
-   ngOnInit(): void {
-    this.alertifyService.message("mesaj",{
-      messageType: MessageType.Warning,
-      position:Position.BottomRight});
-   }
 }

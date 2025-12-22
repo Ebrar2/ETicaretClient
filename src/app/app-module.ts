@@ -42,6 +42,7 @@ import { CdkNoDataRow } from "@angular/cdk/table";
     provideZonelessChangeDetection(),
     provideClientHydration(withEventReplay()),
     {provide:"baseUrl",useValue:"https://localhost:7160/api",multi:true},
+    {provide:"baseSignalRUrl",useValue:"https://localhost:7160/",multi:true},
     {provide:SOCIAL_AUTH_CONFIG,
       useValue: {
         autoLogin: false,

@@ -32,6 +32,8 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor{
               })
             }
             else {
+             // localStorage.removeItem("accessToken");
+              //localStorage.removeItem("refreshToken");
               if (url == "/products") {
                 this.toastrService.message("Oturum Açınız!!!", "Oturum Açınız", {
                   messageType: ToastrMessageTypes.Warning,
