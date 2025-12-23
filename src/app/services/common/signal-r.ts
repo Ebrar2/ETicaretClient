@@ -10,43 +10,33 @@ export class SignalRService {
   {
 
   }
-    private _hubConnection:HubConnection;
-    get hubConnection()
-    {
-      return this._hubConnection;
-    }
    start(hub:string)
     {
-      let hubUrl=this.baseSignalRUrl+hub;
-      if(this._hubConnection==null || this._hubConnection?.state==HubConnectionState.Disconnected)
-      {
-         const builder:HubConnectionBuilder=new HubConnectionBuilder();
-         const connection:HubConnection=builder.withUrl(hubUrl).withAutomaticReconnect().build();
-         connection.start().then(()=>{
-          this._hubConnection=connection;
-          console.log("Bağlantı başarılı")}
-       
-        ).catch(()=>setTimeout(() => {
-          this.start(hubUrl)
-         }, 2000));
-         
-         
-      }
-      else
-      {
-      this._hubConnection.onreconnected((connectionId)=>console.log("reconnected"))
-      this._hubConnection.onreconnecting((error)=>console.log("reconnecting"))
-      this._hubConnection.onclose((error)=>console.log("closed"))
-      }
-  
+     let hubUrl = this.baseSignalRUrl + hub;
+
+     const builder: HubConnectionBuilder = new HubConnectionBuilder();
+     const connection: HubConnection = builder.withUrl(hubUrl).withAutomaticReconnect().build();
+     connection.start().then(() => {
+       console.log("Bağlantı başarılı")
+     }
+
+     ).catch(() => setTimeout(() => {
+       this.start(hubUrl)
+     }, 2000));
+
+     connection.onreconnected((connectionId) => console.log("reconnected"))
+     connection.onreconnecting((error) => console.log("reconnecting"))
+     connection.onclose((error) => console.log("closed"))
+      
+    return connection;
 
     }
-    invoke(methodName:string,message:string,successCallBack?:(value)=>void,errorCallBack?:(error)=>void)
+    invoke(hubUrl:string,methodName:string,message:string,successCallBack?:(value)=>void,errorCallBack?:(error)=>void)
     {
-      this._hubConnection.invoke(methodName,[message]).then(successCallBack).catch(errorCallBack);
+      this.start(hubUrl).invoke(methodName,[message]).then(successCallBack).catch(errorCallBack);
     }
-    on(methodName:string,callback:(...message)=>void)
+    on(hubUrl:string,methodName:string,callback:(...message)=>void)
     {
-      this.hubConnection.on(methodName,callback);
+      this.start(hubUrl).on(methodName,callback);
     }
 }

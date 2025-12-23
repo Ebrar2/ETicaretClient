@@ -18,18 +18,26 @@ export class Dashboard extends Base implements OnInit
   {
   
     super(spinner)
-    signalRService.start(HubUrls.OrderHub)
-      this.signalRService.on(ReceiveFunctions.OrderCreatedMessage,message=>{
-
-   this.alertify.message(message,{
-    messageType:MessageType.Notify
-    
-   })
-
-      })
+  
+  
      
   }
    ngOnInit(){
-    
+      this.signalRService.on(HubUrls.ProductHub,ReceiveFunctions.ProdcutAddedMessage, message => {
+
+       this.alertify.message(message, {
+         messageType: MessageType.Notify
+
+       })
+
+     })
+     this.signalRService.on(HubUrls.OrderHub,ReceiveFunctions.OrderCreatedMessage, message => {
+
+       this.alertify.message(message, {
+         messageType: MessageType.Notify
+
+       })
+
+     })
   }
 }
