@@ -28,15 +28,28 @@ export class Baskets extends Base implements OnInit{
   {
     super(spinner)
   }
+  totalPrice:number=0;
   basketItems:ListBasketItems[]=[];
  async ngOnInit() {
      this.basketItems=await this.basketService.getBasketItems()
-     this.changeD.detectChanges()
+     this.changeTotalPrice()
+  }
+  changeTotalPrice()
+  {
+    this.totalPrice=0;
+   this.basketItems.forEach(element => {
+      this.totalPrice+=element.price*element.quantity
+     });
+         this.changeD.detectChanges()
+
   }
  async changeQuantity(event,basketItemId:string)
   {
     this.showSpinner(SpinnerTypeNames.SquareJellyBox)
     let newQuantity=event.target.value;
+    let updatedQuantity=this.basketItems.filter(b=>b.basketItemId==basketItemId)[0]
+    updatedQuantity.quantity=newQuantity;
+    this.changeTotalPrice()
     await this.basketService.updateQuantityBasketItem({
       quantity:newQuantity,
       basketItemId:basketItemId
@@ -51,6 +64,8 @@ export class Baskets extends Base implements OnInit{
           afterClosed:async()=>{
              this.showSpinner(SpinnerTypeNames.SquareJellyBox)
              await this.basketService.deleteBasketItem(basketItemId);
+             this.basketItems=this.basketItems.filter(b=>b.basketItemId!=basketItemId);
+             this.changeTotalPrice()
              $("."+basketItemId).fadeOut(500)
              this.hideSpinner(SpinnerTypeNames.SquareJellyBox)
           }})
@@ -67,7 +82,8 @@ export class Baskets extends Base implements OnInit{
        this.showSpinner(SpinnerTypeNames.BallScaleMultiple)
        let order = new CreateOrder();
        order.address = "Ankara",
-         order.description = "Açıklama";
+       order.description = "Açıklama";
+       order.totalPrice=this.totalPrice
        await this.orderService.createOrder(order);
        this.hideSpinner(SpinnerTypeNames.BallScaleMultiple)
        this.toastrService.message("Siparişiniz Oluşturuldu", "Sipariş", {
