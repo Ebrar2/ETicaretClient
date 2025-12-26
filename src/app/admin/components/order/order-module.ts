@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { DeleteModule } from '../../../directives/admin/delete-module';
 
 
 
@@ -22,7 +23,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
       {path:"",component:Order}
     ]),
     MatSidenavModule,
-    MatPaginatorModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatTableModule
+    MatPaginatorModule,MatFormFieldModule,MatInputModule,MatButtonModule,MatTableModule,DeleteModule
   ]
 })
 export class OrderModule { }

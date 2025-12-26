@@ -6,7 +6,9 @@ import { OrderService } from '../../../../services/common/models/order-service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Alertify, MessageType, Position } from '../../../../services/admin/alertify';
 import { Base, SpinnerTypeNames } from '../../../../base/base';
-import { Dialog } from '@angular/cdk/dialog';
+
+import { OrderDetailsDialog } from '../../../../dialogs/order-details-dialog/order-details-dialog';
+import { Dialog } from '../../../../services/common/dialog';
 
 
 @Component({
@@ -16,7 +18,7 @@ import { Dialog } from '@angular/cdk/dialog';
   styleUrl: './list.scss',
 })
 export class List extends Base {
-   displayedColumns:string[]=["orderCode","name","totalPrice","createdDate","delete"];
+   displayedColumns:string[]=["orderCode","name","totalPrice","createdDate","details","delete"];
   dataSource:MatTableDataSource<ListOrder>=null;
    @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -50,6 +52,16 @@ export class List extends Base {
      {
        await this.getOrders();
      }
-   
+    showOrderDetails(id:string)
+     {
+        this.dialogService.openDialog({
+         compenent:OrderDetailsDialog,
+         data:id,
+         options:{
+           width:'1400px'
+         }
+        
+       })
+     }
    
 }

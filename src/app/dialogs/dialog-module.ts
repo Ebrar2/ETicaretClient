@@ -9,6 +9,8 @@ import { FileUplodModule } from '../services/common/file-uplod/file-uplod-module
 import {MatCardModule} from '@angular/material/card';
 import { BasketItemDeleteDialog } from './basket-item-delete-dialog/basket-item-delete-dialog';
 import { BasketOrderCreateDialog } from './basket-order-create-dialog/basket-order-create-dialog';
+import { OrderDetailsDialog } from './order-details-dialog/order-details-dialog';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -17,11 +19,12 @@ import { BasketOrderCreateDialog } from './basket-order-create-dialog/basket-ord
     FileUploadDialog,
      SelectProductImages,
      BasketItemDeleteDialog,
-     BasketOrderCreateDialog
+     BasketOrderCreateDialog,
+     OrderDetailsDialog
   ],
   imports: [
     CommonModule,
-    MatDialogModule,MatButtonModule,MatCardModule,
+    MatDialogModule,MatButtonModule,MatCardModule,MatTableModule,
     FileUplodModule
   ]
 })
