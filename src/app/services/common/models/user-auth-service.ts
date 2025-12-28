@@ -5,6 +5,8 @@ import { LoginUserResponse } from '../../../contracts/users/login_user_response'
 import { CustomToastr, ToastrMessageTypes, ToastrPositions } from '../../ui/custom-toastr';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { LoginTypeName } from '../../../contracts/login_type_name';
+import { HttpError } from '@microsoft/signalr';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -56,7 +58,7 @@ export class UserAuthService {
     return false;
   
   }
- async loginWithGoogle(user:SocialUser,callback)
+ async loginWithGoogle(user:SocialUser,callback?)
  {
     const result=this.httpClient.post<SocialUser|LoginUserResponse>({
       controller:"auth",
@@ -81,4 +83,27 @@ export class UserAuthService {
    }
    callback();
  }
+ async resetPassword(email:string,callback?:()=>void)
+ {
+  await firstValueFrom(this.httpClient.post(
+    {
+      controller:"auth",
+      action:"resetPassword"
+    },{email}
+  ))
+  callback()
+ }
+ async verifyResetToken(userId:string,resetToken:string,callback?:()=>void):Promise<boolean>
+ {
+  const observable=this.httpClient.post<{isVerified} | {userId,resetToken}>({
+    controller:"auth",
+    action:"verifyResetToken"
+  },{userId,resetToken});
+  let state:{isVerified:boolean}=await firstValueFrom(observable) as {isVerified:boolean}
+   callback() 
+
+   return state.isVerified as boolean
+ 
+ }
+ 
 }
