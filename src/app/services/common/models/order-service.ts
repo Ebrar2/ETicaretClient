@@ -45,5 +45,12 @@ export class OrderService {
     },id)) 
      
   }
-
+  async completeOrder(id:string,successCallBack?:()=>void,errorCallBack?:(error)=>void)
+  {
+    const observable=this.httpClient.get({
+      controller:"orders",
+      action:"completeOrder"
+    },id);
+    await firstValueFrom(observable).then(()=>successCallBack()).catch((error)=>{errorCallBack(error)})
+  }
 }

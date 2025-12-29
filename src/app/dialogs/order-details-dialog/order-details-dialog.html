@@ -40,13 +40,13 @@
     </thead>
     <tbody>
       <tr>
-        <td style="text-align:right;color:rgb(0, 149, 255);font-size:20px;">{{totalPrice|currency:'tr-TR':'₺'}}</td>
+        <td style="text-align:right;color:rgb(0, 149, 255);font-size:20px;">{{orderDetail.totalPrice|currency:'tr-TR':'₺'}}</td>
       </tr>
       <tr>
-        <td style="text-align:left;font-size:15px;"><strong>Address : {{address}}</strong></td>
+        <td style="text-align:left;font-size:15px;"><strong>Address : {{orderDetail.address}}</strong></td>
       </tr>
       <tr>
-        <td style="text-align:left;font-size:15px;"><strong>Description : {{description}}</strong></td>
+        <td style="text-align:left;font-size:15px;"><strong>Description : {{orderDetail.description}}</strong></td>
       </tr>
     </tbody>
   </table>
@@ -57,5 +57,5 @@
 
 <mat-dialog-actions align="end">
   <button matButton mat-dialog-close>Kapat</button>
-    <button matButton (click)="orderCompleted()" cdkFocusInitial>Siparişi Tamamla</button>
+  @if(!orderDetail.isCompleted){ <button matButton (click)="completeOrder()" cdkFocusInitial>Siparişi Tamamla</button>}
 </mat-dialog-actions>

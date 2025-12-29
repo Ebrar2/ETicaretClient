@@ -18,7 +18,7 @@ import { Dialog } from '../../../../services/common/dialog';
   styleUrl: './list.scss',
 })
 export class List extends Base {
-   displayedColumns:string[]=["orderCode","name","totalPrice","createdDate","details","delete"];
+   displayedColumns:string[]=["orderCode","name","totalPrice","createdDate","completed","details","delete"];
   dataSource:MatTableDataSource<ListOrder>=null;
    @ViewChild(MatPaginator) paginator: MatPaginator;
 

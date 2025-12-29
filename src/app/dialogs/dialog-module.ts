@@ -11,6 +11,7 @@ import { BasketItemDeleteDialog } from './basket-item-delete-dialog/basket-item-
 import { BasketOrderCreateDialog } from './basket-order-create-dialog/basket-order-create-dialog';
 import { OrderDetailsDialog } from './order-details-dialog/order-details-dialog';
 import { MatTableModule } from '@angular/material/table';
+import { OrderCompleteDialog } from './order-complete-dialog/order-complete-dialog';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MatTableModule } from '@angular/material/table';
      SelectProductImages,
      BasketItemDeleteDialog,
      BasketOrderCreateDialog,
-     OrderDetailsDialog
+     OrderDetailsDialog,
+     OrderCompleteDialog
   ],
   imports: [
     CommonModule,
