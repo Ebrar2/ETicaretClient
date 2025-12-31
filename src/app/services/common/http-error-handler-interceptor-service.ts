@@ -7,12 +7,13 @@ import { UserAuthService } from './models/user-auth-service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerTypeNames } from '../../base/base';
+import { Auth } from './auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor{
-  constructor(private toastrService:CustomToastr,private userAuthService:UserAuthService,private router:Router,private spinner:NgxSpinnerService){}
+  constructor(private toastrService:CustomToastr,private authService:Auth,private userAuthService:UserAuthService,private router:Router,private spinner:NgxSpinnerService){}
  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(error => {
       switch(error.status)
@@ -38,7 +39,11 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor{
                 this.toastrService.message("Oturum Açınız!!!", "Oturum Açınız", {
                   messageType: ToastrMessageTypes.Warning,
                   position: ToastrPositions.TopRight
-                })
+                }) 
+              }
+              else
+              {
+                this.authService.identityCheck()
               }
             }
           }

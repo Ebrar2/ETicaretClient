@@ -12,7 +12,8 @@ import { BasketOrderCreateDialog } from './basket-order-create-dialog/basket-ord
 import { OrderDetailsDialog } from './order-details-dialog/order-details-dialog';
 import { MatTableModule } from '@angular/material/table';
 import { OrderCompleteDialog } from './order-complete-dialog/order-complete-dialog';
-
+import { AuthorizeMenuDialog } from './authorize-menu-dialog/authorize-menu-dialog';
+import {MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -22,12 +23,13 @@ import { OrderCompleteDialog } from './order-complete-dialog/order-complete-dial
      BasketItemDeleteDialog,
      BasketOrderCreateDialog,
      OrderDetailsDialog,
-     OrderCompleteDialog
+     OrderCompleteDialog,
+     AuthorizeMenuDialog
   ],
   imports: [
     CommonModule,
     MatDialogModule,MatButtonModule,MatCardModule,MatTableModule,
-    FileUplodModule
+    FileUplodModule, MatBadgeModule
   ]
 })
 export class DialogModule { }
