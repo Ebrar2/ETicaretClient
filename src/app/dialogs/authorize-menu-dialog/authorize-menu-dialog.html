@@ -2,9 +2,20 @@
 <div mat-dialog-content >
   <p> Aşağıdaki rolleri atayabilirsiniz</p>
 </div>
-  <div matBadge="4" matBadgeOverlap="false" class="demo-section"></div>
+  
+<mat-selection-list #roles>
+ @for (role of allRoles.roles; track $index) {
+      <mat-list-option [value]="role">{{role.name}}</mat-list-option>
+
+ }
+  
+</mat-selection-list>
+
+<p>
+  Options selected: {{roles.selectedOptions.selected.length}}
+</p>
 
 <div mat-dialog-actions>
   <button mat-button (click)="close()">İptal</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Evet</button>
+  <button mat-button [mat-dialog-close]="data" (click)="assignRole(roles)" cdkFocusInitial>Evet</button>
 </div>

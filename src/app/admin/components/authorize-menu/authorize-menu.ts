@@ -43,7 +43,7 @@ export class AuthorizeMenu implements OnInit {
       data:{code:code,name:name},
        options:{
         width:'1400px'
-      }
+      },afterClosed:()=>{}
     })
   }
 }
