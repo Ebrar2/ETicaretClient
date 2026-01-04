@@ -25,7 +25,8 @@ export class AuthorizeMenu implements OnInit {
       label: menu.name,
       children: menu.actions.map(action => ({
         label: action.definition,
-        code:action.code
+        code:action.code,
+        menu:menu.name,
       }))
     }));
      this.change.detectChanges()
@@ -36,11 +37,11 @@ export class AuthorizeMenu implements OnInit {
   hasChild = (_: number, node: TreeNode) =>
     !!node.children && node.children.length > 0;
 
-  assignRole(code:string,name:string)
+  assignRole(code:string,name:string,menu:string)
   {
     this.dialogService.openDialog({
       compenent:AuthorizeMenuDialog,
-      data:{code:code,name:name},
+      data:{code:code,name:name,menu:menu},
        options:{
         width:'1400px'
       },afterClosed:()=>{}
@@ -49,6 +50,7 @@ export class AuthorizeMenu implements OnInit {
 }
 export interface TreeNode {
   label: string;
+  menu?:string;
   children?: TreeNode[];
   code?:string;
 }

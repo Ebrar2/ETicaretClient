@@ -5,7 +5,7 @@
   
 <mat-selection-list #roles>
  @for (role of allRoles.roles; track $index) {
-      <mat-list-option [value]="role">{{role.name}}</mat-list-option>
+      <mat-list-option [selected]="isSelected(role.name)" [value]="role.name">{{role.name}}</mat-list-option>
 
  }
   

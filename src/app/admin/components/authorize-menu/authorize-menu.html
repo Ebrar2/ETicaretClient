@@ -1,7 +1,7 @@
 <mat-tree #tree [dataSource]="dataSource" [childrenAccessor]="childrenAccessor">
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
     <button matIconButton disabled></button>
-   <a style="margin-right: 20px;" (click)="assignRole(node.code,node.label)" matButton >Rol Ata</a>
+   <a style="margin-right: 20px;" (click)="assignRole(node.code,node.label,node.menu)" matButton >Rol Ata</a>
     {{node.label}}- {{node.code}}
   </mat-tree-node>
   <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodeToggle
