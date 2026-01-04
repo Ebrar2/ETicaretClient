@@ -15,6 +15,7 @@ import { OrderCompleteDialog } from './order-complete-dialog/order-complete-dial
 import { AuthorizeMenuDialog } from './authorize-menu-dialog/authorize-menu-dialog';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
+import { AuthorizeUserDialog } from './authorize-user-dialog/authorize-user-dialog';
 @NgModule({
   declarations: [
     DeleteDialog,
@@ -24,7 +25,8 @@ import {MatListModule} from '@angular/material/list';
      BasketOrderCreateDialog,
      OrderDetailsDialog,
      OrderCompleteDialog,
-     AuthorizeMenuDialog
+     AuthorizeMenuDialog,
+     AuthorizeUserDialog
   ],
   imports: [
     CommonModule,

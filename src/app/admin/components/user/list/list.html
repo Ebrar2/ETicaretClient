@@ -1,0 +1,43 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Kullanıcı Adı </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="namesurname">
+      <th mat-header-cell *matHeaderCellDef>İsim-Soyisim </th>
+      <td mat-cell *matCellDef="let element"> {{element.nameSurname}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Mail </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+     <ng-container matColumnDef="twoFactorEnabled">
+      <th mat-header-cell *matHeaderCellDef> İki Adımlı Doğrulama </th>
+      <td mat-cell *matCellDef="let element"><img  width="40" height="35" [src]="element.twoFactorEnabled?'on-button.png':'off-button.png'">  </td>
+    </ng-container>
+     <ng-container matColumnDef="assignRole">
+      <th mat-header-cell *matHeaderCellDef>   </th>
+      <td mat-cell *matCellDef="let element"><button (click)="assignRole(element.id)" mat-button color="primary">Rol Ata</button> </td>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element"> <img style="cursor: pointer;" width="25" height="25" src="edit.png"> </td>
+    </ng-container>
+        <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td  mat-cell *matCellDef="let element" appDelete [id]="element.id" controller="users" (callback)="getUsers()"> </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator (page)="pageChanged()"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>

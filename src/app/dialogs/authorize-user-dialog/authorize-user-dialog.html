@@ -1,0 +1,21 @@
+<h1 mat-dialog-title> Rol Atama</h1>
+<div mat-dialog-content >
+  <p> Aşağıdaki rolleri atayabilirsiniz</p>
+</div>
+  
+<mat-selection-list #roles>
+ @for (role of allRoles.roles; track $index) {
+      <mat-list-option [selected]="isSelected(role.name)" [value]="role.name">{{role.name}}</mat-list-option>
+
+ }
+  
+</mat-selection-list>
+
+<p>
+  Options selected: {{roles.selectedOptions.selected.length}}
+</p>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">İptal</button>
+  <button mat-button [mat-dialog-close]="data" (click)="assignRole(roles)" cdkFocusInitial>Evet</button>
+</div>
