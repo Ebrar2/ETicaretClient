@@ -2,7 +2,7 @@
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
     <button matIconButton disabled></button>
    <a style="margin-right: 20px;" (click)="assignRole(node.code,node.label,node.menu)" matButton >Rol Ata</a>
-    {{node.label}}- {{node.code}}
+    {{node.label}}
   </mat-tree-node>
   <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodeToggle
                  [cdkTreeNodeTypeaheadLabel]="node.name">

@@ -29,25 +29,25 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor{
             if (url == "/products") {
               this.toastrService.message("Sepete ürün ekleme işlemi başarısız.Lütfen Oturum Açınız!!!", "Oturum Açınız", {
                 messageType: ToastrMessageTypes.Warning,
-                position: ToastrPositions.TopRight
+                position: ToastrPositions.BottomFullWidth
               })
             }
             else {
-             // localStorage.removeItem("accessToken");
-              //localStorage.removeItem("refreshToken");
-              if (url == "/products") {
-                this.toastrService.message("Oturum Açınız!!!", "Oturum Açınız", {
+                this.toastrService.message("Lütfen Oturum Açınız!!!", "Oturum Açınız", {
+                messageType: ToastrMessageTypes.Warning,
+                position: ToastrPositions.BottomFullWidth
+              })
+              
+            }
+            this.authService.identityCheck()
+          }
+         
+         }).catch(()=>{
+           
+                this.toastrService.message("Yetkisiz Erişim!!!", "Yetkisiz Erişim", {
                   messageType: ToastrMessageTypes.Warning,
                   position: ToastrPositions.TopRight
-                }) 
-              }
-              else
-              {
-                this.authService.identityCheck()
-              }
-            }
-          }
-
+                })
          });
           }
           else
@@ -60,12 +60,10 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor{
               })
             }
             else {
-              if (url == "/products") {
-                this.toastrService.message("Oturum Açınız!!!", "Oturum Açınız", {
-                  messageType: ToastrMessageTypes.Warning,
-                  position: ToastrPositions.TopRight
-                })
-              }
+               this.toastrService.message("Lütfen Oturum Açınız!!!", "Oturum Açınız", {
+                messageType: ToastrMessageTypes.Warning,
+                position: ToastrPositions.TopRight
+              })
             }
           }
           break;
