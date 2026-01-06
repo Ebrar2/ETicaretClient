@@ -16,6 +16,7 @@ import { AuthorizeMenuDialog } from './authorize-menu-dialog/authorize-menu-dial
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
 import { AuthorizeUserDialog } from './authorize-user-dialog/authorize-user-dialog';
+import { ShowQrcodeDialog } from './show-qrcode-dialog/show-qrcode-dialog';
 @NgModule({
   declarations: [
     DeleteDialog,
@@ -26,7 +27,8 @@ import { AuthorizeUserDialog } from './authorize-user-dialog/authorize-user-dial
      OrderDetailsDialog,
      OrderCompleteDialog,
      AuthorizeMenuDialog,
-     AuthorizeUserDialog
+     AuthorizeUserDialog,
+     ShowQrcodeDialog
   ],
   imports: [
     CommonModule,

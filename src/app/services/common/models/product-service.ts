@@ -87,4 +87,13 @@ export class ProductService {
           successCallBack()
         })
   }
+  async generateQRCode(productId:string)
+  {
+    const obs:Observable<Blob>=this.httpClient.get({
+       controller:"product",
+       action:"GenerateQRCodeToProduct",
+       responseType:"blob"
+     },productId)
+     return await firstValueFrom(obs)
+  }
 }

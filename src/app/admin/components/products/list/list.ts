@@ -8,6 +8,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { ListProduct } from '../../../../contracts/products/list_product';
 import { Dialog } from '../../../../services/common/dialog';
 import { SelectProductImages } from '../../../../dialogs/select-product-images/select-product-images';
+import { ShowQrcodeDialog } from '../../../../dialogs/show-qrcode-dialog/show-qrcode-dialog';
 
 @Component({
   selector: 'app-list',
@@ -16,7 +17,7 @@ import { SelectProductImages } from '../../../../dialogs/select-product-images/s
   styleUrl: './list.scss',
 })
 export class List extends Base implements OnInit{
-  displayedColumns:string[]=["name","stock","price","updatedDate","createdDate","photo","edit","delete"];
+  displayedColumns:string[]=["name","stock","price","updatedDate","createdDate","photo","qrCode","edit","delete"];
   dataSource:MatTableDataSource<ListProduct>=null;
    @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private productService:ProductService,
@@ -58,6 +59,17 @@ export class List extends Base implements OnInit{
         width:'1400px'
       }
      
+    })
+  }
+  showProductQR(id:string)
+  {
+    this.dialogService.openDialog({
+      compenent:ShowQrcodeDialog,
+      data:id,
+      options:{
+        width:'500px'
+      },
+      afterClosed:()=>{}
     })
   }
 }

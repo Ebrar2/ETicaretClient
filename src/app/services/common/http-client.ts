@@ -27,7 +27,7 @@ export class HttpClientService {
     else
       url=`${this.getUrl(requestParameters)}${id ? `/${id}` : ""}${requestParameters.queryString ? `?${requestParameters.queryString}` : ""}`;
 
-    return this.httpClient.get<T>(url, {headers:requestParameters.headers});
+    return this.httpClient.get<T>(url, {headers:requestParameters.headers,responseType:requestParameters.responseType as "json"});
   }
   post<T>(requestParameters:Partial<RequestParameters>,body:Partial<T>):Observable<T>
   {
@@ -68,4 +68,5 @@ export class RequestParameters
    headers?: HttpHeaders;
    baseUrl?: string;
    fullEndPoint?: string;
+   responseType?:string="json";
 }
