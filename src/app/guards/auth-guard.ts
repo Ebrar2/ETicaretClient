@@ -2,10 +2,11 @@ import { CanActivateFn } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { CustomToastr, ToastrMessageTypes, ToastrPositions } from '../services/ui/custom-toastr';
-import { inject } from '@angular/core';
+import { inject, PLATFORM_ID } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerTypeNames } from '../base/base';
 import { Auth } from '../services/common/auth';
+import { isPlatformBrowser } from '@angular/common';
 
 
 
@@ -16,10 +17,16 @@ export const authGuard: CanActivateFn = (route, state) => {
   const toastrService:CustomToastr = inject(CustomToastr);
   const spinner :NgxSpinnerService= inject(NgxSpinnerService);
   const authService:Auth=inject(Auth)
-   spinner.show(SpinnerTypeNames.BallScaleMultiple)
+  const platformId: object= inject(PLATFORM_ID);
+
+  if (!isPlatformBrowser(platformId)) {
+    return true; 
+  }
+
 //authService.identityCheck()
    if(!authService._isAuthenticated())       
-   { spinner.hide(SpinnerTypeNames.SquareJellyBox)
+   { 
+
     router.navigate(["/login"],{
         queryParams:{returnUrl:state.url}
        })
@@ -31,6 +38,5 @@ export const authGuard: CanActivateFn = (route, state) => {
        
    }
     
-  spinner.hide(SpinnerTypeNames.BallScaleMultiple)
    return true;
 };

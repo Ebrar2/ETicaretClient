@@ -17,6 +17,10 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
 import { AuthorizeUserDialog } from './authorize-user-dialog/authorize-user-dialog';
 import { ShowQrcodeDialog } from './show-qrcode-dialog/show-qrcode-dialog';
+import { ReadQrcodeDialog } from './read-qrcode-dialog/read-qrcode-dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NgxScannerQrcodeComponent  } from 'ngx-scanner-qrcode';
 @NgModule({
   declarations: [
     DeleteDialog,
@@ -28,12 +32,15 @@ import { ShowQrcodeDialog } from './show-qrcode-dialog/show-qrcode-dialog';
      OrderCompleteDialog,
      AuthorizeMenuDialog,
      AuthorizeUserDialog,
-     ShowQrcodeDialog
+     ShowQrcodeDialog,
+     ReadQrcodeDialog
   ],
   imports: [
     CommonModule,
     MatDialogModule,MatButtonModule,MatCardModule,MatTableModule,
-    FileUplodModule, MatBadgeModule,MatListModule
+    FileUplodModule, MatBadgeModule,MatListModule,MatFormFieldModule,MatInputModule,
+    NgxScannerQrcodeComponent
+    
   ]
 })
 export class DialogModule { }

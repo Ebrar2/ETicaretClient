@@ -96,4 +96,12 @@ export class ProductService {
      },productId)
      return await firstValueFrom(obs)
   }
+  async changeProductStock(productId:string,stock:number,successCallBack?:()=>void,errorCallBack?:(error)=>void)
+  {
+    const obs=this.httpClient.put({
+      controller:"product",
+      action:"changeProductStock"
+    },{id:productId,stock:stock})
+     await firstValueFrom(obs).then(()=>successCallBack()).catch((error)=>errorCallBack(error))
+  }
 }

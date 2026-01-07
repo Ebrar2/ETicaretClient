@@ -4,6 +4,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClientService } from '../../../services/common/http-client';
 import { CreateProduct } from '../../../contracts/products/create_product';
 import { List } from './list/list';
+import { Dialog } from '../../../services/common/dialog';
+import { ReadQrcodeDialog } from '../../../dialogs/read-qrcode-dialog/read-qrcode-dialog';
 
 @Component({
   selector: 'app-products',
@@ -12,7 +14,9 @@ import { List } from './list/list';
   styleUrl: './products.scss',
 })
 export class Products extends Base implements OnInit {
-   constructor(spinner:NgxSpinnerService,private httpClientService:HttpClientService)
+   constructor(spinner:NgxSpinnerService,private httpClientService:HttpClientService,
+    private dialogService:Dialog
+   )
    {
    super(spinner);
    }
@@ -33,5 +37,17 @@ export class Products extends Base implements OnInit {
     {
       this.listComponent.getProducts();
 
+    }
+    readQRCode()
+    {
+      this.dialogService.openDialog({
+          compenent:ReadQrcodeDialog,
+          data:"",
+          options:{
+            width:'1000px',
+            heigt:'950px'
+          },
+          afterClosed:()=>{}
+        })
     }
 }
