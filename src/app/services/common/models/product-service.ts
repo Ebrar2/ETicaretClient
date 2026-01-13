@@ -7,6 +7,8 @@ import { firstValueFrom, Observable } from 'rxjs';
 import { ListProduct } from '../../../contracts/products/list_product';
 import { ListProductImage } from '../../../contracts/products/list_product_image';
 import { error } from 'console';
+import { UpdateProductList } from '../../../contracts/products/update_product_list';
+import { UpdateProduct } from '../../../contracts/products/update_product';
 
 @Injectable({
   providedIn: 'root',
@@ -103,5 +105,26 @@ export class ProductService {
       action:"changeProductStock"
     },{id:productId,stock:stock})
      await firstValueFrom(obs).then(()=>successCallBack()).catch((error)=>errorCallBack(error))
+  }
+  async getById(id:string,successCallBack?:()=>void,errorCallBack?:(error)=>void):Promise<UpdateProductList>
+  {
+   const obs=this.httpClient.get<UpdateProductList>({
+      controller:"product",
+    },id)
+    let data:UpdateProductList;
+     await firstValueFrom(obs).then((d)=>{
+      data=d
+      successCallBack()} ).catch((error)=>errorCallBack(error))
+    return data;
+
+  }
+  async updateProduct(product:Partial<UpdateProduct>,successCallBack?:()=>void,errorCallBack?:(error)=>void)
+  {
+      const obs=this.httpClient.put({
+      controller:"product",
+    },product)
+     await firstValueFrom(obs).then((d)=>{
+      successCallBack()} ).catch((error)=>errorCallBack(error))
+
   }
 }

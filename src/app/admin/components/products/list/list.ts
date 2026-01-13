@@ -9,6 +9,7 @@ import { ListProduct } from '../../../../contracts/products/list_product';
 import { Dialog } from '../../../../services/common/dialog';
 import { SelectProductImages } from '../../../../dialogs/select-product-images/select-product-images';
 import { ShowQrcodeDialog } from '../../../../dialogs/show-qrcode-dialog/show-qrcode-dialog';
+import { UpdateProductDialog } from '../../../../dialogs/update-product-dialog/update-product-dialog';
 
 @Component({
   selector: 'app-list',
@@ -72,4 +73,16 @@ export class List extends Base implements OnInit{
       afterClosed:()=>{}
     })
   }
+  updateProduct(id:string)
+{
+  this.dialogService.openDialog({
+      compenent:UpdateProductDialog,
+      data:id,
+      options:{
+        width:'600px'
+      },
+      afterClosed:()=>{}
+    })
+}
+
 }

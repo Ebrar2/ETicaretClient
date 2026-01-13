@@ -21,6 +21,14 @@ import { ReadQrcodeDialog } from './read-qrcode-dialog/read-qrcode-dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgxScannerQrcodeComponent  } from 'ngx-scanner-qrcode';
+import { UpdateProductDialog } from './update-product-dialog/update-product-dialog';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatIconModule} from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import {
+  MatAutocompleteModule,
+  type MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     DeleteDialog,
@@ -33,13 +41,14 @@ import { NgxScannerQrcodeComponent  } from 'ngx-scanner-qrcode';
      AuthorizeMenuDialog,
      AuthorizeUserDialog,
      ShowQrcodeDialog,
-     ReadQrcodeDialog
+     ReadQrcodeDialog,
+     UpdateProductDialog
   ],
   imports: [
     CommonModule,
     MatDialogModule,MatButtonModule,MatCardModule,MatTableModule,
     FileUplodModule, MatBadgeModule,MatListModule,MatFormFieldModule,MatInputModule,
-    NgxScannerQrcodeComponent
+    NgxScannerQrcodeComponent,MatChipsModule,MatIconModule,MatAutocompleteModule,FormsModule
     
   ]
 })

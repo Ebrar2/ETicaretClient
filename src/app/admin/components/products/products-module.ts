@@ -15,6 +15,10 @@ import { FileUplodModule } from '../../../services/common/file-uplod/file-uplod-
 import { DialogModule } from '../../../dialogs/dialog-module';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteModule } from '../../../directives/admin/delete-module';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,7 @@ import { DeleteModule } from '../../../directives/admin/delete-module';
     CommonModule,RouterModule.forChild(
       [{path:"",component:Products}]
     ),
-    DeleteModule
+    DeleteModule,MatChipsModule,MatIconModule,MatAutocompleteModule,FormsModule
   ]
 })
 export class ProductsModule { }
