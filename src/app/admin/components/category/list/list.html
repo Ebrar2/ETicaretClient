@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element"> <img style="cursor: pointer;" width="25" height="25" src="edit.png"> </td>
+      <td mat-cell *matCellDef="let element"> <img style="cursor: pointer;" (click)="updateCategory(element.id,element.name)" width="25" height="25" src="edit.png"> </td>
     </ng-container>
         <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef></th>

@@ -6,6 +6,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { RoleService } from '../../../../services/common/models/role-service';
 import { ListRole } from '../../../../contracts/roles/list_role';
 import { Alertify, MessageType, Position } from '../../../../services/admin/alertify';
+import { Dialog } from '../../../../services/common/dialog';
+import { UpdateRoleDialog } from '../../../../dialogs/update-role-dialog/update-role-dialog';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +19,9 @@ export class List extends Base implements OnInit {
   displayedColumns:string[]=["name","edit","delete"];
   dataSource:MatTableDataSource<ListRole>=null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(spinner:NgxSpinnerService,private roleService:RoleService,private alertify:Alertify)
+  constructor(spinner:NgxSpinnerService,private roleService:RoleService,private alertify:Alertify,
+    private dialogService:Dialog
+  )
   {
     super(spinner)
   }
@@ -45,5 +49,17 @@ export class List extends Base implements OnInit {
  async pageChanged()
   {
      await this.getRoles();
+  }
+  updateRole(id:string,name:string)
+  {
+       this.dialogService.openDialog({
+           compenent:UpdateRoleDialog,
+           data:{id:id,name:name},
+            options:{
+             width:'400px'
+           },afterClosed:async()=>{
+             await this.getRoles()
+           }
+         })
   }
 }

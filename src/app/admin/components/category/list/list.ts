@@ -7,6 +7,7 @@ import { Alertify, MessageType, Position } from '../../../../services/admin/aler
 import { Dialog } from '../../../../services/common/dialog';
 import { Base, SpinnerTypeNames } from '../../../../base/base';
 import { CategoryService } from '../../../../services/common/models/category-service';
+import { UpdateCategoryDialog } from '../../../../dialogs/update-category-dialog/update-category-dialog';
 
 @Component({
   selector: 'app-list',
@@ -47,5 +48,16 @@ export class List extends Base{
   {
     await this.getCategories();
   }
- 
+  updateCategory(id:string,name:string)
+  {
+   this.dialogService.openDialog({
+      compenent:UpdateCategoryDialog,
+      data:{id:id,name:name},
+       options:{
+        width:'400px'
+      },afterClosed:async()=>{
+        await this.getCategories()
+      }
+    })
+  }
 }

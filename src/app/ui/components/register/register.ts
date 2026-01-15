@@ -4,6 +4,7 @@ import { group } from 'console';
 import { UserService } from '../../../services/common/models/user-service';
 import { UserRegister } from '../../../entities/userRegister';
 import { CustomToastr, ToastrMessageTypes, ToastrPositions } from '../../../services/ui/custom-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,9 @@ import { CustomToastr, ToastrMessageTypes, ToastrPositions } from '../../../serv
 })
 export class Register implements OnInit {
   form:FormGroup;
-   constructor(private formBuilder:FormBuilder,private userService:UserService,private toastrService:CustomToastr)
+   constructor(private formBuilder:FormBuilder,private userService:UserService,private toastrService:CustomToastr,
+    private router:Router
+   )
    {
 
    }
@@ -51,6 +54,8 @@ export class Register implements OnInit {
           messageType:ToastrMessageTypes.Success,
           position:ToastrPositions.TopRight
          })
+        this.router.navigate(["/login"])
+     
     }
     else
     {

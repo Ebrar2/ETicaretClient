@@ -37,12 +37,12 @@ export class RoleService {
         action:"createRole"
        },{name:name})).then((result)=>successCallBack(result)).catch(()=>errorCallBack())
    }
-   async updateRole(id:string,name:string)
+   async updateRole(id:string,name:string,successCallBack?:()=>void,errorCallBack?:()=>void)
    {
       return await firstValueFrom(this.httpClient.put({
         controller:"roles",
         action:"updateRole"
-       },{id:id,name:name}))
+       },{id:id,name:name})).then(()=>successCallBack()).catch(()=>errorCallBack())
    }
     async deleteRole(name:string)
    {

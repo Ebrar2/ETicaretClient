@@ -28,10 +28,15 @@ export class List extends Base implements OnInit{
   {
     super(spinner)
   }
- async getProducts()
+ async getProducts(controle:boolean=false,searchByName?:string)
   {
     this.showSpinner(SpinnerTypeNames.BallScaleMultiple);
-    const datas:{totalCount:number,products:ListProduct[]}=await this.productService.read(this.paginator?this.paginator.pageIndex:0,this.paginator?this.paginator.pageSize:5,undefined,()=>{
+    if(controle)
+      this.paginator.pageIndex=0
+    const datas:{totalCount:number,products:ListProduct[]}=await this.productService.read(this.paginator?this.paginator.pageIndex:0,this.paginator?this.paginator.pageSize:5,{
+      name:searchByName,
+      filter:null
+    },()=>{
       this.hideSpinner(SpinnerTypeNames.BallScaleMultiple);
     },(errorMessage)=>{
        this.aletrtify.message(errorMessage,{
@@ -50,7 +55,10 @@ export class List extends Base implements OnInit{
   {
     await this.getProducts();
   }
-
+  searchByName(name:string)
+  {
+     this.getProducts(true,name)
+  }
   showProductImage(id:string)
   {
      this.dialogService.openDialog({
@@ -81,7 +89,9 @@ export class List extends Base implements OnInit{
       options:{
         width:'600px'
       },
-      afterClosed:()=>{}
+      afterClosed:async()=>{
+        await this.getProducts()
+      }
     })
 }
 

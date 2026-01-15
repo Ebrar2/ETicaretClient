@@ -37,17 +37,21 @@ export class List extends Base implements OnInit {
   totalProductCount:number;
   totalPageCount:number;
   productPageSize=10;
-  pageItems:number[]=[]
+  pageItems:number[]=[];
+  filter:FilterProductItem=null;
  async ngOnInit() {
-   await this.getProducts(null,false)
+   await this.getProducts(false)
     
   }
- async getProducts(filter:FilterProductItem=null,controle:boolean=false){
+ async getProducts(controle:boolean=false,searchByName?:string){
       this.activatedRoute.params.subscribe(async params=>{
       this.currentPageNo=parseInt(params["pageNo"]??1)
-      if(filter!=null || controle)
+      if(this.filter!=null || controle)
         this.currentPageNo=1
-      const data=await this.productService.read(this.currentPageNo-1,this.productPageSize,filter,()=>{},()=>{});
+      const data=await this.productService.read(this.currentPageNo-1,this.productPageSize,{
+        filter:this.filter,
+        name:searchByName
+      },()=>{},()=>{});
      if(data!=null)
      {
           var resultProducts=data.products;
@@ -74,7 +78,8 @@ export class List extends Base implements OnInit {
   }
  async filterProduct(data:FilterProductItem)
   {
-    await this.getProducts(data,true);
+    this.filter=data
+    await this.getProducts(true);
   }
   editPageItemValues() {
     this.pageItems = []
@@ -112,4 +117,13 @@ export class List extends Base implements OnInit {
       })
     });
   }
+  searchByName(name:string)
+  {
+     this.getProducts(true,name)
+  }
+}
+export class FilterProductParameter
+{
+  name?:string
+  filter?:FilterProductItem
 }

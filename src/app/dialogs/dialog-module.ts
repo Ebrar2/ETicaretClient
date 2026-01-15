@@ -29,6 +29,8 @@ import {
   MatAutocompleteModule,
   type MatAutocompleteSelectedEvent,
 } from '@angular/material/autocomplete';
+import { UpdateCategoryDialog } from './update-category-dialog/update-category-dialog';
+import { UpdateRoleDialog } from './update-role-dialog/update-role-dialog';
 @NgModule({
   declarations: [
     DeleteDialog,
@@ -42,7 +44,9 @@ import {
      AuthorizeUserDialog,
      ShowQrcodeDialog,
      ReadQrcodeDialog,
-     UpdateProductDialog
+     UpdateProductDialog,
+     UpdateCategoryDialog,
+     UpdateRoleDialog
   ],
   imports: [
     CommonModule,

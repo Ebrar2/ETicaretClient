@@ -44,7 +44,6 @@ reset()
 
 export class FilterProductItem
 {
-    price:number
-    categories:string[]=[]
-
+    price?:number
+    categories?:string[]=[]
 }

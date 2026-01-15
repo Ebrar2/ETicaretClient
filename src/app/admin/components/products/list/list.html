@@ -1,3 +1,13 @@
+<div>
+  <mat-form-field class="product-create">
+  <mat-label >Ürün Adı Giriniz</mat-label>
+  <input matInput #txtName>
+</mat-form-field>
+
+<button matButton="filled" (click)="searchByName(txtName.value)" >Ara</button>
+
+
+</div>
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
 

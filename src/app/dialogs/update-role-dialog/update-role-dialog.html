@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Rol Bilgileri</h2>
+<mat-form-field class="role-update">
+  <mat-label >Rol</mat-label>
+  <input matInput #txtName [value]="data.name"> 
+</mat-form-field>
+
+
+<button [mat-dialog-close]="data"  matButton="filled" class="btn" (click)="update(txtName.value)">Kaydet</button>
+ 

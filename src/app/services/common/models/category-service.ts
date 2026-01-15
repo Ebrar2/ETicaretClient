@@ -34,4 +34,10 @@ export class CategoryService {
        action:"createCategory"
      },{name:name})).then(()=>successCallback()).catch((errorMessage)=>errorCallback(errorMessage))
    }
+   async update(name:string,id:string,successCallback?:()=>void,errorCallback?:(errorMessage)=>void)
+   {
+     await firstValueFrom(this.httpClientService.put({
+       controller:"categories"
+     },{name:name,id:id})).then(()=>successCallback()).catch((errorMessage)=>errorCallback(errorMessage))
+   }
 }
