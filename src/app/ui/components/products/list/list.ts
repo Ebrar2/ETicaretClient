@@ -7,6 +7,7 @@ import { Base, SpinnerTypeNames } from '../../../../base/base';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BasketService } from '../../../../services/common/models/basket-service';
 import { CustomToastr, ToastrMessageTypes, ToastrPositions } from '../../../../services/ui/custom-toastr';
+import { FilterProductItem } from '../filter-product/filter-product';
 
 
 @Component({
@@ -38,9 +39,15 @@ export class List extends Base implements OnInit {
   productPageSize=10;
   pageItems:number[]=[]
  async ngOnInit() {
-     this.activatedRoute.params.subscribe(async params=>{
+   await this.getProducts(null,false)
+    
+  }
+ async getProducts(filter:FilterProductItem=null,controle:boolean=false){
+      this.activatedRoute.params.subscribe(async params=>{
       this.currentPageNo=parseInt(params["pageNo"]??1)
-      const data=await this.productService.read(this.currentPageNo-1,this.productPageSize,()=>{},()=>{});
+      if(filter!=null || controle)
+        this.currentPageNo=1
+      const data=await this.productService.read(this.currentPageNo-1,this.productPageSize,filter,()=>{},()=>{});
      if(data!=null)
      {
           var resultProducts=data.products;
@@ -63,13 +70,12 @@ export class List extends Base implements OnInit {
        this.changeD.detectChanges();
 
      }
-       
-       
-     
      })
-    
   }
-  
+ async filterProduct(data:FilterProductItem)
+  {
+    await this.getProducts(data,true);
+  }
   editPageItemValues() {
     this.pageItems = []
     if(this.totalPageCount>=this.currentPageNo)

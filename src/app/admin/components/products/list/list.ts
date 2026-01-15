@@ -31,7 +31,7 @@ export class List extends Base implements OnInit{
  async getProducts()
   {
     this.showSpinner(SpinnerTypeNames.BallScaleMultiple);
-    const datas:{totalCount:number,products:ListProduct[]}=await this.productService.read(this.paginator?this.paginator.pageIndex:0,this.paginator?this.paginator.pageSize:5,()=>{
+    const datas:{totalCount:number,products:ListProduct[]}=await this.productService.read(this.paginator?this.paginator.pageIndex:0,this.paginator?this.paginator.pageSize:5,undefined,()=>{
       this.hideSpinner(SpinnerTypeNames.BallScaleMultiple);
     },(errorMessage)=>{
        this.aletrtify.message(errorMessage,{

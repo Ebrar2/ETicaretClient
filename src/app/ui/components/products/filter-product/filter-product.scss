@@ -1,0 +1,7 @@
+.form-range {
+  pointer-events: none;
+}
+
+.form-range::-webkit-slider-thumb {
+  pointer-events: auto;
+}

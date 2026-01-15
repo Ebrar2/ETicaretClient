@@ -4,13 +4,15 @@ import { Products } from './products';
 import { RouterModule } from '@angular/router';
 import { List } from './list/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FilterProduct } from './filter-product/filter-product';
 
 
 
 @NgModule({
   declarations: [
     Products,
-    List
+    List,
+    FilterProduct
   ],
   imports: [
     CommonModule, RouterModule.forChild([

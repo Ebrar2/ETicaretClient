@@ -9,6 +9,7 @@ import { ListProductImage } from '../../../contracts/products/list_product_image
 import { error } from 'console';
 import { UpdateProductList } from '../../../contracts/products/update_product_list';
 import { UpdateProduct } from '../../../contracts/products/update_product';
+import { FilterProductItem } from '../../../ui/components/products/filter-product/filter-product';
 
 @Injectable({
   providedIn: 'root',
@@ -36,13 +37,14 @@ export class ProductService {
         errorCallBack(message);
      });
   }
-  async read(page:number=0,size:number=5,successCallBack?:()=>void,errorCallBack?:(errorMessage)=>void):Promise<{totalCount:number,products:ListProduct[],baseUrl:string}>
+  async read(page:number=0,size:number=5,filter?:FilterProductItem,successCallBack?:()=>void,errorCallBack?:(errorMessage)=>void):Promise<{totalCount:number,products:ListProduct[],baseUrl:string}>
   {
     let data:{totalCount:number,products:ListProduct[],baseUrl:string}=null;
-    await firstValueFrom(this.httpClient.get({
+    await firstValueFrom(this.httpClient.post<{}>({
       controller:"product",
-      queryString:`page=${page}&size=${size}`
-     })).then((d:{totalCount:number,products:ListProduct[],baseUrl:string})=>{
+      action:"getAll"
+     // queryString:`page=${page}&size=${size}`
+     },{page:page,size:size,filterCategories:filter?filter.categories:null,maxPrice:filter?filter.price:null})).then((d:{totalCount:number,products:ListProduct[],baseUrl:string})=>{
       successCallBack()
       data=d;
       
