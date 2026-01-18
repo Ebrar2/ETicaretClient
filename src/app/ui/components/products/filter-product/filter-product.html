@@ -23,17 +23,30 @@
 
         }
       </div>
-    </select>
+    </select> 
     <hr>
     <h6>Maksimum Fiyat</h6>
         <input type="range" class="form-range"  value="150" min="0" max="10000"  (input)="onSearchChange($event.target.value)" >
     <div class="text-end">
      {{price()}}₺
     </div>
-
-    
+<div class="dropdown">
+  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+   {{selectedChoose? selectedChoose:"Sırala" }} 
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" style="cursor: pointer;" (click)="setDropDownValue(null,'Sıralama')">Sıralama</a></li>
+    <li><a class="dropdown-item" style="cursor: pointer;" (click)="setDropDownValue(true,'Fiyata Göre Artan')">Fiyata Göre Artan</a></li>
+    <li><a class="dropdown-item" style="cursor: pointer;" (click)="setDropDownValue(false,'Fiyata Göre Azalan')">Fiyata Göre Azalan</a></li>
+  </ul>
+</div>
+<br>
+<br>
+    <div>
     <button class="btn btn-primary w-100" (click)="filter()">Filtrele</button>
     <button class="btn btn-outline-secondary w-100 mt-2" (click)="reset()">Temizle</button>
+    </div>
+
 
   </div>
 </div>

@@ -15,11 +15,11 @@ export class UserService {
   constructor(private httpClient: HttpClientService,private toastrService:CustomToastr) {
 
   }
-  async getAllUsers(page:number,size:number,successCallBack?:()=>void,errorCallBack?:(error)=>void)
+  async getAllUsers(page:number,size:number,name:string,successCallBack?:()=>void,errorCallBack?:(error)=>void)
   {
      const obs=this.httpClient.get({
       controller:"users",
-      queryString:"page="+page+"&size="+size
+      queryString:"page="+page+"&size="+size+"&name="+name
      })
      const promise= firstValueFrom(obs);
      promise.then(()=>successCallBack()).catch((error)=>errorCallBack(error)) 

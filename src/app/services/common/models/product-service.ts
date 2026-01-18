@@ -11,6 +11,7 @@ import { UpdateProductList } from '../../../contracts/products/update_product_li
 import { UpdateProduct } from '../../../contracts/products/update_product';
 import { FilterProductItem } from '../../../ui/components/products/filter-product/filter-product';
 import { FilterProductParameter } from '../../../ui/components/products/list/list';
+import { GetProductDetails } from '../../../contracts/products/get_product_details';
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +46,8 @@ export class ProductService {
       controller:"product",
       action:"getAll"
      // queryString:`page=${page}&size=${size}`
-     },{page:page,size:size,filterCategories:filterProduct.filter?filterProduct.filter.categories:null,maxPrice:filterProduct.filter?filterProduct.filter.price:null,
+     },{page:page,size:size,filterCategories:filterProduct.filter?filterProduct.filter.categories:null,maxPrice:filterProduct.filter?filterProduct.filter.price:null
+      ,isAscending:filterProduct.filter?filterProduct.filter.isAscending:null,
       name:filterProduct.name
      })).then((d:{totalCount:number,products:ListProduct[],baseUrl:string})=>{
       successCallBack()
@@ -131,5 +133,13 @@ export class ProductService {
      await firstValueFrom(obs).then((d)=>{
       successCallBack()} ).catch((error)=>errorCallBack(error))
 
+  }
+  async getProductDetails(id:string)
+  {
+     const getValue:Observable<GetProductDetails>= this.httpClient.get<GetProductDetails>({
+      action:"getProductDetails",
+      controller:"product"
+     },id);
+     return await firstValueFrom(getValue)
   }
 }

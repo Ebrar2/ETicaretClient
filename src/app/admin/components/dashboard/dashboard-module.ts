@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Dashboard } from './dashboard';
 import { RouterModule } from '@angular/router';
+import { MatLabel } from '@angular/material/form-field';
 
 
 
@@ -10,11 +11,10 @@ import { RouterModule } from '@angular/router';
     Dashboard
   ],
   imports: [
-    CommonModule,RouterModule.forChild(
-      [
-        {path:"",component:Dashboard}
-      ]
-    )
-  ]
+    CommonModule, RouterModule.forChild([
+        { path: "", component: Dashboard }
+    ]),
+    MatLabel
+]
 })
 export class DashboardModule { }

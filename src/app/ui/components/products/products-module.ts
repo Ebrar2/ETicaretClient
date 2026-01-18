@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { List } from './list/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FilterProduct } from './filter-product/filter-product';
+import { ShowProductDetail } from './show-product-detail/show-product-detail';
 
 
 
@@ -12,11 +13,13 @@ import { FilterProduct } from './filter-product/filter-product';
   declarations: [
     Products,
     List,
-    FilterProduct
+    FilterProduct,
+    ShowProductDetail
   ],
   imports: [
     CommonModule, RouterModule.forChild([
-        { path: "", component: Products }
+        { path: "", component: Products },
+        {path:"details/:id",component:ShowProductDetail}
     ])
 ]
 })

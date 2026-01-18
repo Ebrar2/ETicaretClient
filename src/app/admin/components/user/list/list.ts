@@ -26,10 +26,10 @@ export class List extends Base{
   {
     super(spinner)
   }
- async getUsers()
+ async getUsers(name:string="")
   {
     this.showSpinner(SpinnerTypeNames.BallScaleMultiple);
-    const datas:{totalCount:number,users:ListUser[]}=await this.userService.getAllUsers(this.paginator?this.paginator.pageIndex:0,this.paginator?this.paginator.pageSize:5,()=>{
+    const datas:{totalCount:number,users:ListUser[]}=await this.userService.getAllUsers(this.paginator?this.paginator.pageIndex:0,this.paginator?this.paginator.pageSize:5,name,()=>{
       this.hideSpinner(SpinnerTypeNames.BallScaleMultiple);
     },(errorMessage)=>{
        this.aletrtify.message(errorMessage,{
@@ -57,5 +57,9 @@ export class List extends Base{
             width:'1400px'
           },afterClosed:()=>{}
         })
+  }
+    searchByName(name:string)
+  {
+     this.getUsers(name)
   }
 }

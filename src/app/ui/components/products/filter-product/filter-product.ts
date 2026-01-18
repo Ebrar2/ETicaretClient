@@ -9,7 +9,8 @@ import { CategoryService } from '../../../../services/common/models/category-ser
 })
 export class FilterProduct implements OnInit {
   @Output() filterProduct: EventEmitter<any> = new EventEmitter();
-
+  isAscending:boolean=null
+  selectedChoose:string='Sıralama'
   constructor(private categoryService: CategoryService) {
 
   }
@@ -30,6 +31,7 @@ filter()
 {
   let filterProductItem=new FilterProductItem();
   filterProductItem.price=this.price()
+  filterProductItem.isAscending=this.isAscending
  const checked = document.querySelectorAll('#brandFilters input[type="checkbox"]:checked');
   checked.forEach(element => {
     filterProductItem.categories.push(element.getAttribute("value"))
@@ -40,10 +42,16 @@ reset()
 {
     this.filterProduct.emit(null)
 }
+setDropDownValue(isAscending:boolean,choose:string)
+{
+   this.isAscending=isAscending
+   this.selectedChoose=choose
+}
 }
 
 export class FilterProductItem
 {
     price?:number
     categories?:string[]=[]
+    isAscending?:boolean=null
 }
