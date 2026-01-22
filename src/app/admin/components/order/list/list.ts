@@ -29,10 +29,13 @@ export class List extends Base {
      {
        super(spinner)
      }
-    async getOrders()
+    async getOrders(orderCode:string=null)
      {
        this.showSpinner(SpinnerTypeNames.BallScaleMultiple);
-       const datas:{totalCount:number,orders:ListOrder[]}=await this.orderService.getOrders(this.paginator?this.paginator.pageIndex:0,this.paginator?this.paginator.pageSize:5,()=>{
+       let page=this.paginator?this.paginator.pageIndex:0
+       if(orderCode!=null)
+         page=0
+       const datas:{totalCount:number,orders:ListOrder[]}=await this.orderService.getOrders(page,this.paginator?this.paginator.pageSize:5,orderCode,()=>{
          this.hideSpinner(SpinnerTypeNames.BallScaleMultiple);
        },(errorMessage)=>{
           this.aletrtify.message(errorMessage,{
@@ -62,6 +65,10 @@ export class List extends Base {
          }
         
        })
+     }
+    async searchByOrderCode(orderCode:string)
+     { 
+       await this.getOrders(orderCode);
      }
    
 }

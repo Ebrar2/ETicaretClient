@@ -21,12 +21,12 @@ export class OrderService {
     },createOrder))
   }
   
-    async getOrders(page:number=0,size:number=5,successCallBack?:()=>void,errorCallBack?:(errorMessage)=>void):Promise<{totalCount:number,orders:ListOrder[]}>
+    async getOrders(page:number=0,size:number=5,orderCode?:string,successCallBack?:()=>void,errorCallBack?:(errorMessage)=>void):Promise<{totalCount:number,orders:ListOrder[]}>
   {
     let data:{totalCount:number,orders:ListOrder[]}=null;
     await firstValueFrom(this.httpClient.get({
       controller:"orders",
-      queryString:`page=${page}&size=${size}`
+      queryString:`page=${page}&size=${size}&orderCode=${orderCode}`
      })).then((d:{totalCount:number,orders:ListOrder[],baseUrl:string})=>{
       successCallBack()
       data=d;

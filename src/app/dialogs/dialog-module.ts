@@ -31,6 +31,7 @@ import {
 } from '@angular/material/autocomplete';
 import { UpdateCategoryDialog } from './update-category-dialog/update-category-dialog';
 import { UpdateRoleDialog } from './update-role-dialog/update-role-dialog';
+import { CustomerOrderDetailsDialog } from './customer-order-details-dialog/customer-order-details-dialog';
 @NgModule({
   declarations: [
     DeleteDialog,
@@ -46,14 +47,14 @@ import { UpdateRoleDialog } from './update-role-dialog/update-role-dialog';
      ReadQrcodeDialog,
      UpdateProductDialog,
      UpdateCategoryDialog,
-     UpdateRoleDialog
+     UpdateRoleDialog,
+     CustomerOrderDetailsDialog
   ],
   imports: [
     CommonModule,
     MatDialogModule,MatButtonModule,MatCardModule,MatTableModule,
     FileUplodModule, MatBadgeModule,MatListModule,MatFormFieldModule,MatInputModule,
     NgxScannerQrcodeComponent,MatChipsModule,MatIconModule,MatAutocompleteModule,FormsModule
-    
   ]
 })
 export class DialogModule { }

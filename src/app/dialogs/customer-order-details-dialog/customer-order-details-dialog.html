@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Müşteri Siparişleri</h2>
+
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="orderCode">
+    <mat-header-cell *matHeaderCellDef> Sipariş Kodu </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.orderCode}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="totalPrice">
+    <mat-header-cell *matHeaderCellDef> Toplam Fiyat </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.totalPrice}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="createdDate">
+    <mat-header-cell *matHeaderCellDef> Sipariş Oluşturulma Tarihi </mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.createdDate|date:'dd/MM/yy'}} </mat-cell>
+  </ng-container>
+   <ng-container matColumnDef="completed">
+    <mat-header-cell *matHeaderCellDef> İletildi </mat-header-cell>
+    <mat-cell *matCellDef="let element"><img *ngIf="element.isCompleted" style="cursor: pointer;"  width="25" height="25" src="completed.png"> </mat-cell>
+  </ng-container>
+  
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

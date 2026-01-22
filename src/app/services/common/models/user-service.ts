@@ -7,6 +7,8 @@ import { CreateUserResponse } from '../../../contracts/users/create_user_respons
 import { CustomToastr, ToastrMessageTypes, ToastrPositions } from '../../ui/custom-toastr';
 import { error } from 'console';
 import { ListUser } from '../../../contracts/users/list_user';
+import { ListCustomer } from '../../../contracts/customers/list_customer';
+import { ListCustomerOrder } from '../../../contracts/customers/list_customerOrder';
 
 @Injectable({
   providedIn: 'root',
@@ -61,5 +63,24 @@ export class UserService {
     },{id:id,roles:roles})
     await firstValueFrom(observable).then(()=>{
        successCallBack()}).catch((error)=>errorCallBack(error))
+ }
+ async getCustomers(page:number,size:number,name:string,successCallBack?:()=>void,errorCallBack?:(error)=>void)
+ {
+    const obs=this.httpClient.post<{}>({
+      controller:"users",
+      action:"getCustomers"
+     },{page:page,size:size,name:name})
+     const promise= firstValueFrom(obs);
+     promise.then(()=>successCallBack()).catch((error)=>errorCallBack(error)) 
+     return await promise as {customers:ListCustomer[],totalCount:number}
+ }
+ async getCustomerOrders(id:string,successCallBack?:()=>void,errorCallBack?:(error)=>void){
+   const obs=this.httpClient.get({
+      controller:"users",
+      action:"getCustomerOrders"
+     },id)
+     const promise= firstValueFrom(obs);
+     promise.then(()=>successCallBack()).catch((error)=>errorCallBack(error)) 
+     return await promise as {customerOrders:ListCustomerOrder[]}
  }
 }

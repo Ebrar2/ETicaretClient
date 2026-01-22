@@ -26,10 +26,13 @@ export class List extends Base{
   {
     super(spinner)
   }
- async getUsers(name:string="")
+ async getUsers(name:string="",control=false)
   {
     this.showSpinner(SpinnerTypeNames.BallScaleMultiple);
-    const datas:{totalCount:number,users:ListUser[]}=await this.userService.getAllUsers(this.paginator?this.paginator.pageIndex:0,this.paginator?this.paginator.pageSize:5,name,()=>{
+    let page=this.paginator?this.paginator.pageIndex:0;
+    if(control)
+      page=0
+    const datas:{totalCount:number,users:ListUser[]}=await this.userService.getAllUsers(page,this.paginator?this.paginator.pageSize:5,name,()=>{
       this.hideSpinner(SpinnerTypeNames.BallScaleMultiple);
     },(errorMessage)=>{
        this.aletrtify.message(errorMessage,{
@@ -60,6 +63,6 @@ export class List extends Base{
   }
     searchByName(name:string)
   {
-     this.getUsers(name)
+     this.getUsers(name,true)
   }
 }

@@ -1,3 +1,11 @@
+<div>
+  <mat-form-field class="order-search">
+  <mat-label >Sipariş Numarası Giriniz</mat-label>
+  <input matInput #txtName>
+</mat-form-field>
+
+<button matButton="filled" (click)="searchByOrderCode(txtName.value)" >Ara</button>
+
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
 
